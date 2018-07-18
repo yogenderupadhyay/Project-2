@@ -1,0 +1,95 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+.body{
+background:orange url("<c:url value="/resources/images/background4.jpg"/>") no-repeat center;
+background-size:cover;
+margin:0px;
+color:black;
+background-color: orange;
+}
+}
+.header{
+background-color: #808080;
+}
+.logo img {
+width: 100px;
+height: auto;
+float: left;
+}
+header h1{
+display:inline;
+margin: 0;
+}
+header ul{
+color: black;
+display:inline;
+margin-top: 0;
+font-family: sans-serif;
+}
+header ul li{
+list-style-type: none;
+display: inline-block;
+padding: 5px 15px;
+}
+header ul li a{
+color: black;
+}
+#active{
+border: 1px solid black;
+}
+header ul li a:hover{
+border: 1px solid red;
+background: red;
+}
+
+.center{
+text-align: center;
+padding: 05%;
+font-family: monospace;
+}
+#button{
+background:#1c8abd;
+border: 1px solid white;
+color: black;
+size: 20px;
+}
+.form{
+display:block;
+background: rgba(0, 0, 0, 0.5);
+height: auto;
+width: 30%;
+font-family: sans-serif;
+font-size: 18px;
+color: white;
+padding: 10px;
+border-radius: 20px;
+margin:10px 30%;
+}
+.form input, a{
+width: 80%;
+height: 5%;
+border: none;
+color:white;
+border-bottom: 1px solid #fff;
+outline: none;
+font-size:16px;
+background: transparent;
+border-radius: 10px;
+margin: 5px;
+}
+.form input[type="submit"]{
+width: 40%;
+height: 10%;
+background:#fff;
+color:black;
+border-radius: 10px;
+font-size: 18px;
+margin: 5px;
+}
+.form textarea{
+width:80%;
+height: 30%;
+background: transparent;
+border: solid;
+color:white;
+}

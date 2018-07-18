@@ -1,0 +1,5 @@
+com\project\middleware\restController\ForumController.class
+com\project\middleware\restController\JobController.class
+com\project\middleware\restController\FriendController.class
+com\project\middleware\restController\UserController.class
+com\project\middleware\restController\BlogController.class

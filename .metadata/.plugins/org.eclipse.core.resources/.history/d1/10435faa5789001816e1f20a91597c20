@@ -1,0 +1,59 @@
+<div class="container-fluid show-job" data-ng-controller="JobController">
+<div class="row">
+<h1 style="border-bottom-style: ridge; border-bottom-color: coral; border-bottom-width: 7px; margin">
+{{currentJob.jobTitle}}</h1>
+<table class="table-condensed" style="width: 100%">
+							<tr>
+								<td class="col-md-3" style="width: 3%">Job Id</td>
+								<td style="width: 2%">:</td>
+								<td class="col-md-3" style="color: white; width: 95%;">{{currentJob.jobid}}</td>
+							</tr>
+								
+							<tr>
+								<td class="col-md-3">Job Qualification</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{currentJob.jobQualification}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Job Salary :</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{currentJob.jobSalary}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Number Of Openings :</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{currentJob.noOfOpenings}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Status</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{currentJob.jobStatus}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Job Description :</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{currentJob.jobDescription}}</td>
+							</tr>
+							<tr>
+								<td colspan="3"><input type="submit"
+									class="btn btn-primary links" value="Apply Job"
+									data-ng-click="applyJob(job)" />
+									<input
+									type="submit" class="btn btn-primary links" value="Close Job"
+									data-ng-click="closeJob(currentJob.jobid)" />
+									 <input
+									type="button" class="btn btn-primary links" value="Delete Job"
+									data-ng-click="deleteJob(currentJob.jobid)" />
+
+									<a href="#!editJob"><input type="submit"
+									class="btn btn-primary links" value="Edit Job"
+									data-ng-click="getJob(currentJob.jobid)" /> </a>
+
+									 <a href="#!viewJob"> <input
+									type="button" class="btn btn-primary links" value="Open Job"
+									data-ng-click="getJob(currentJob.jobid)" /></a></td>
+							</tr>
+						</table>
+</div>
+
+</div>

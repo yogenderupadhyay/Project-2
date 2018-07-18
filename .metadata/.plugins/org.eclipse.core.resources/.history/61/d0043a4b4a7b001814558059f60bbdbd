@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+    <title>LetsTalk</title>
+
+    <!-- Bootstrap core CSS -->
+	<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+    <!-- Custom styles for this template -->
+	<link rel="stylesheet" href="resources/css/lt-styles.css"/>
+
+</head>
+<body class="index1"style="background-image: url('resources/img/1.jpg');">
+<h1>SADFDHJGHFDASASFGJJGHFG</h1>
+</body>
+</html>

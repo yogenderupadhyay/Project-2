@@ -1,0 +1,10 @@
+<center>Suggested Friend Data</center>
+<div data-ng-controller="FriendController">
+	<table class="table">
+		<tr><td>Friend Name</td><td>Operation</td></tr>
+		<tr data-ng-repeat="friend in suggestedFriends">
+			<td>{{friend.friendUserName}}</td>
+			<td><input type="submit" value="Delete Request" data-ng-click="sendFriendRequest(friend.friendUserName)"/></td>
+		</tr>
+	</table>
+</div>

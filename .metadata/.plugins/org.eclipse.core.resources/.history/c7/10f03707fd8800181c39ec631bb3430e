@@ -1,0 +1,32 @@
+<div class="container" id="forum-box" data-ng-Controller="ChatController">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-header">
+					<h1>Lets Make Some Talk</h1>
+				</div>
+				<form role="form" data-ng-submit="addMessage()">
+					<div class="form-group">
+						<label align="center">Message <input type="text"
+						class="form-control" placeholder="Enter message here"
+						style="width: 550px;" data-ng-model="message"/></label>
+					<button id="btn" class="btn btn-primary"
+						data-ng-disabled="message.length>250||message.length==0">Send</button><br>
+					<span style="float: right; margin-top: 5px;">Maximum <span
+						classs="count" data-ng-bind="max - message.length"> 250 </span></span>
+					</div>
+					</form>
+
+
+			<div data-ng-repeat="msg in messages">
+				<cite class="text-left" style="margin-top: -15px;"
+					data-ng-controller="UserController"> <a href=""
+					data-ng-click="getUserDetails(blogComment.emailId)">{{currentUser.emailID}}</a></cite>
+				<blockquote style="border-bottom-style: ridge;">
+
+					<p>{{msg.message}}</p>
+				</blockquote>
+			</div>
+
+		</div>
+		</div>
+	</div>

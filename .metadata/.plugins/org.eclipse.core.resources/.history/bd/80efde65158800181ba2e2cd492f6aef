@@ -1,0 +1,12 @@
+
+<div class="container" ng-controller="UserController" id="forum-box">
+	<h2>Profile Picture</h2>
+	<form enctype="multipart/form-data" data-ng-upload method="post" action="http://localhost:8085/LetsTalkMiddleware/doUpload">
+		<div class="form-group input-group">	
+			 <label>Profile Picture</label>
+      		<input  type="file" class="form-control" name="file" placeholder="Upload Picture">
+		</div>
+		<br>
+		<button type="submit" class="btn btn-info">Upload Profile Picture</button>
+	</form>
+</div>

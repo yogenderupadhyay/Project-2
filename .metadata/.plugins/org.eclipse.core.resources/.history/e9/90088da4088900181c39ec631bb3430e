@@ -1,0 +1,70 @@
+myApp.controller("FriendController",function($scope, $http, $location, $rootScope) {
+					$scope.friend = {
+						"userName" : '',
+						"friendUserName" : '',
+						"status" : ''
+					};
+					$scope.pendingFriendRequest;
+					$scope.suggestedFriends;
+
+					function friendList() {
+						console.log('Friend Data');
+						$http.get("http://localhost:8085/LetsTalkMiddleware/showFriendList")
+								.then(function(response) {
+									$scope.friendList = response.data;
+									console.log($scope.acceptfrienddata);
+								});
+					}
+
+					function suggestedFriends() {
+						console.log('Suggested Friend');
+						$http.get("http://localhost:8085/LetsTalkMiddleware/showSuggestedFriend")
+								.then(function(response) {
+									$rootScope.suggestedFriends = response.data;
+									console.log($scope.suggestedFriends);
+								});
+					}
+
+					function pendingFriendRequest() {
+						console.log('Pending Friend Request');
+						$http.get("http://localhost:8085/LetsTalkMiddleware/showPendingRequests")
+								.then(
+										function(response) {
+											$scope.pendingFriendRequest = response.data;
+											console
+													.log($scope.pendingFriendRequest);
+										});
+					}
+
+					$scope.acceptFriendRequest = function(friendId) {
+						console.log('Accept Friend Request');
+						$http.get(
+								"http://localhost:8085/LetsTalkMiddleware/acceptFriendRequest/"
+										+ friendId).then(function(response) {
+
+						});
+					}
+
+					$scope.deleteFriendRequest = function(friendId) {
+						console.log('Delete Friend Request');
+						$http.get(
+								"http://localhost:8085/LetsTalkMiddleware/deleteFriendRequest/"
+										+ friendId).then(function(response) {
+
+						});
+					}
+
+					$scope.sendFriendRequest = function(friendloginname) {
+						$scope.friend.loginname = rootScope.currentUser.email;
+						$scope.friend.friendloginname = friendloginname;
+
+						$http
+								.post(
+										'http://localhost:8085/LetsTalkMiddleware/sendFriendRequest',
+										$scope.friend).then(function(response) {
+
+								});
+					}
+					friendData();
+					suggestedFriends();
+				});

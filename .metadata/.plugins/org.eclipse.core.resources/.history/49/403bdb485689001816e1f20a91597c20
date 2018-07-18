@@ -1,0 +1,17 @@
+<div class="container-fluid show-job" data-ng-controller="JobController">
+<div class="row">
+<h1 style="border-bottom-style: ridge; border-bottom-color: coral; border-bottom-width: 7px; margin">
+{{currentJob.jobTitle}}</h1>
+ 
+                <blockquote  style="border-bottom-style:outset; border-bottom-width: 4px;">
+                <p> {{currentJob.jobDescription}} </p> 
+                <footer class="text-right">posted by&nbsp;
+              <span>
+              <a href="" data-ng-click="">Apply Job</a>
+              <a href="" data-ng-click="">Delete Job</a>
+              <a href="" data-ng-click=""> Job</a>
+              </span>
+  </blockquote>
+</div>
+
+</div>

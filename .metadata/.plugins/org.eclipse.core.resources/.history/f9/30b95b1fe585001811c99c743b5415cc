@@ -1,0 +1,5 @@
+package com.project.middleware.restController;
+
+public class UploadProfilePic {
+
+}

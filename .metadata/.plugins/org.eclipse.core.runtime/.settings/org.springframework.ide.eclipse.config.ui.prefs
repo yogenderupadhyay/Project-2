@@ -1,0 +1,6 @@
+//com.springsource.config.ui.prefs.activePageIndex\:/LetsTalkMiddleware/src/main/webapp/WEB-INF/Dispatcher-Servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/e-mart/src/main/webapp/WEB-INF/dispatcher-servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/frontend/src/main/webapp/WEB-INF/Dispatcher-Servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/frontend/src/main/webapp/WEB-INF/springsecurit-Servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/shoppingBazaar/src/main/webapp/WEB-INF/Dispatcher-Servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+eclipse.preferences.version=1

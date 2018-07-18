@@ -1,0 +1,35 @@
+<div class="container" ng-Controller="UserController">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<h1 class="well">
+				<font face="Monotype Corsiva">Registration Form</font>
+			</h1>
+			<form>
+				<div class="form group">
+					<label>Login Name</label> <input type="text" name="loginname"
+						ng-model="User.loginname" placeholder="Enter User Name Here.."
+						class="form-control"> <label>Password </label> <input
+						type="password" name="password" ng-model="User.password"
+						placeholder="Enter Password Here.." class="form-control">
+					<label>Address</label>
+					<textarea name="address" ng-model="User.address"
+						placeholder="Enter Address Here.." rows="3" class="form-control"></textarea>
+		
+					<label>User Name</label> <input type="text" name="userName"
+						ng-model="User.userName" placeholder="Enter Your Name Here.."
+						class="form-control"> <label>Mobile Number</label> <input
+						type="text" name="mobileNo" ng-model="User.mobileNo"
+						placeholder="Enter Mobile Number Here.." class="form-control">
+				
+					<label>Email Address</label> <input type="text" name="emailId"
+						ng-model="User.emailId" placeholder="Enter Email Address Here.."
+						class="form-control">
+				</div>
+				<div>
+					<button type="button" ng-click="register()"
+						class="btn btn-lg btn-info">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

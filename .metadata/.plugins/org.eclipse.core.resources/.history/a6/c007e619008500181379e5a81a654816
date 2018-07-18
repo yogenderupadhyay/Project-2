@@ -1,0 +1,63 @@
+
+
+	<div class="container-fluid" data-ng-controller="BlogController">
+		<div class="row">
+			<div class="col-md-12">
+			<div class="col-sm-4 col-sm-offset-4" style=" border-bottom: 5px solid red;">
+					<h3 >List of Created Blogs</h3></div>
+			<div class="col-md-8 col-sm-offset-2">
+			<div style=" border-bottom: double;" data-ng-repeat="blog in blogData">
+			<form style="border : 1px solid #000;" action="">
+						<table class="table-condensed" style="width: 100%">
+							<tr>
+								<td class="col-md-3" style="width: 3%">Blog Id</td>
+								<td style="width: 2%">:</td>
+								<td class="col-md-3" style="color: white; width: 95%;">{{blog.blogId}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Blog Name :</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{blog.blogTitle}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Blog Content</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{blog.blogContent}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Status</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{blog.status}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Likes</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{blog.blogLikes}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Dislikes</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{blog.blogDislikes}}</td>
+							</tr>
+							<tr>
+								<td colspan="3"><input type="submit"
+									class="btn btn-primary links" value="Like"
+									data-ng-click="incrementLike(blog.blogId,$index)" /><input
+									type="submit" class="btn btn-primary links" value="Dislike"
+									data-ng-click="incrementDislike(blog.blogId,$index)" /> <input
+									type="button" class="btn btn-primary links" value="Approve Blog"
+									data-ng-click="approveBlog(blog.blogId)" /> <input
+									type="button" class="btn btn-primary links" value="Reject Blog"
+									data-ng-click="rejectBlog(blog.blogId)" /> <input
+									type="button" class="btn btn-primary links" value="Comments"
+									data-ng-click="deleteBlog(blog.blogId)" /></td>
+							</tr>
+						</table>
+				</form>
+			</div>
+				</div>
+				</div>
+		</div>
+	</div>
+
+	

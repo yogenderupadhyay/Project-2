@@ -1,0 +1,50 @@
+<div class="container" ng-Controller="c_jobController">
+<br>	
+	<div align="center">
+	<div class="card" style="width:400px;min-height:630px;padding:0px;border:1px solid black;">
+ 	 <h4 style="background-color:powderblue;padding:10px;" align="center" class="card-title"><b>Post Job</b></h4><br>
+    	<p align="center" style="padding:0;"><img class="card-img-top" src="resources/joinme-logo.png" alt="Card image" style="width:150px;height:100px;"></p>
+    	<div style="text-align:left;" class="card-body">
+    
+   			<form>
+		
+			<div class="row">
+				<div class="col-sm-6 form-group">
+					<label>Job Title</label>
+						<input type="text" name="jobtitle" ng-model="Job.jobtitle"  placeholder="Enter Jot title Here" class="form-control" required>
+				</div>
+				
+				<div class="col-sm-6 form-group">
+					<label>Job Salary</label>
+						<input type="text" name="jobsalary" ng-model="Job.jobsalary" placeholder="Enter Job Salary" class="form-control" required>
+				</div>		
+			</div>					
+			
+			<div class="form-group">
+					<label>Job Description</label>
+						<textarea name="jobdesciption" ng-model="Job.jobdescription" placeholder="Enter Description Here" rows="3" class="form-control" required></textarea>
+			</div>
+						
+			<div class="form-group">
+				<label>How many Vacancies</label>
+					<input type="text" name="no_of_openings" ng-model="Job.no_of_openings" placeholder="Enter nuber of openings" class="form-control" required>
+			</div>		
+					
+			<div class="form-group">
+				<label>Job Qualification</label>
+					<input type="text" name="jobqualification" ng-model="Job.jobqualification" placeholder="Enter Qualification Here" class="form-control" required>
+			</div>	
+
+			<button type="button" ng-click="postjob()" class="btn btn-lg btn-primary">Post Job</button>					
+		
+	</form> 
+	
+		</div>
+	</div>
+</div>
+	
+	
+	
+	
+	
+	</div>

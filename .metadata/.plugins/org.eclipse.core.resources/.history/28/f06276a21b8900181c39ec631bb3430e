@@ -1,0 +1,59 @@
+
+	<div class="container-fluid" >
+		<div class="row">
+			<div class="col-xs-12">
+			<div class="col-sm-4 col-sm-offset-4" style=" border-bottom: 5px solid red;">
+					<h2 class="text-center">User Details</h2></div>
+			<div class="col-xs-8 col-sm-offset-2">
+			<div class="row col-sm-4 col-sm-offset-4" >
+			<img class="img-circle" data-ng-hide="currentUser==undefined"  
+					src="http://localhost:8085/LetsTalkMiddleware/getImage/{{userDetail.emailID}}."
+					alt="avatar" onerror=this.src="resources/img/user.png" style=" width: 200px;height: 200px;border: 2px solid white;float: right; ">
+			</div>
+			<form style="border : 1px solid #000;" >
+						<table class="table-condensed" style="width: 100%" data-ng-controller="UserController">
+							<tr>
+								<td valign="top" class="col-xs-3" style="width: 5%">First Name</td>
+								<td valign="top" style="width: 2%">:</td>
+								<td valign="top" class="col-xs-3" style="color: white; width: 93%;">{{userDetail.firstName}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-xs-3">Last Name :</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{userDetail.lastName}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-xs-3">Email Id</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{userDetail.emailID}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-xs-3">Gender</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{userDetail.gender}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-xs-3">Mobile</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{userDetail.mobile}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-xs-3">Date of birth</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{userDetail.d_o_b}}</td>
+							</tr>
+							
+						</table>
+						<div data-ng-controller="FriendController">
+						    <input data-ng-hide="currentUser.emailID=userDetail.emailID"
+									type="submit" class="btn btn-primary" value="Send Friend Request"
+									data-ng-click="sendFriendRequest()" />
+     					 </div>
+					</form>
+					</div>
+					</div>
+				<br>
+				<br>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,27 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Blog</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container" ng-controller="UserController">
+	<h2>Profile Picture</h2>
+	<form enctype="multipart/form-data" method="post" action="http://localhost:8085/CodeWarriaorsMiddleware/doUpload">
+		<div class="form-group input-group">	
+			 <label>Profile Picture</label>
+      		<input  type="file" class="form-control" name="file" placeholder="Upload Picture">
+		</div>
+		<br>
+		<button type="submit" class="btn btn-info">Upload Profile Picture</button>
+	</form>
+</div>
+</body>
+</html>

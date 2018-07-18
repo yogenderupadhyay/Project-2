@@ -1,0 +1,32 @@
+<div class="container" id="forum-box" data-ng-Controller="BlogController">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-header">
+					<h1>Lets Make Some Talk</h1>
+				</div>
+				<form role="form" method="post">
+					<div class="form-group">
+						<label align="center">Message <input type="text"
+						class="form-control" placeholder="Enter message here"
+						style="width: 550px;" data-ng-model="message"></label>
+					<button id="btn" class="btn btn-primary"
+						data-ng-disabled="message.length>250||message.length==0">Send</button>
+					<span style="float: right; margin-top: 5px;">Maximum <span
+						classs="count" data-ng-bind="max - message.length"> 250 </span></span>
+					</div>
+							<div style=" border-bottom: double;" data-ng-repeat="msg in messages">
+			<form style="border : 1px solid #000;" action="">
+						<table class="table-condensed" style="width: 100%">
+							<tr>
+								<td class="col-md-3" style="width: 3%"><img class="img-circle" data-ng-hide="currentUser==undefined"  
+					src="http://localhost:8085/LetsTalkMiddleware/getImage/{{currentUser.emailID}}."
+					alt="avatar" onerror=this.src="resources/img/user.png" style=" width: 40px;height: 40px;border: 2px solid white;float: right; "></img>{{currentUser.emailID}}</td>
+								<td style="width: 2%">:</td>
+								<td class="col-md-3" style="color: white; width: 95%;">{{msg.message}}</td>
+							</tr>
+							
+						</table>
+				</form>
+			</div>
+		</div>
+	</div>

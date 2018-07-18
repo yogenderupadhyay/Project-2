@@ -1,0 +1,263 @@
+package com.project.LetsTalk.daoimpl;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.HibernateException;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.project.LetsTalk.dao.JobDAO;
+import com.project.LetsTalk.dao.UserDAO;
+import com.project.LetsTalk.model.Job;
+import com.project.LetsTalk.model.JobApplication;
+
+@Repository("jobDAO")
+@Transactional
+public class JobDAOImpl implements JobDAO {
+	@Autowired
+	SessionFactory sessionFactory;
+	@Autowired
+	private UserDAO userDAO;
+	@Autowired
+	private JobDAO jobDAO;
+	@Autowired
+	private Job job;
+	private int getMaxJobID() {
+		int maxValue = 100;
+		try {
+			maxValue = (Integer) sessionFactory.getCurrentSession().createQuery("select max(jobid) from Job")
+					.uniqueResult();
+			System.out.println("maxvalue "+maxValue);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 100;
+		}
+		return maxValue;
+	}
+	public boolean saveJob(Job job) {
+		try {
+			job.setJobid(getMaxJobID() + 1);
+			job.setDateOfPost(new Date());
+			job.setJobStatus("OPEN");
+			sessionFactory.getCurrentSession().save(job);
+			return true;
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public boolean closeJob(int jobid) {
+		try {
+			job=jobDAO.getJob(jobid);
+			job.setJobStatus('C');
+			sessionFactory.getCurrentSession().update(job);
+			return true;
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+	public boolean updateJob(Job job) {
+		try {
+			sessionFactory.getCurrentSession().update(job);
+			return true;
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
+	public Job getJob(int jobid) {
+
+		return (Job) sessionFactory.getCurrentSession().createCriteria(Job.class).add(Restrictions.eq("jobid", jobid))
+				.uniqueResult();
+
+	}
+
+	public List<Job> jobList() {
+
+		return	sessionFactory.getCurrentSession().createQuery("from Job").list();
+
+	}
+
+	public List<Job> jobList(char jobstatus) {
+
+		return sessionFactory.getCurrentSession().createCriteria(Job.class).add(Restrictions.eq("jobstatus", jobstatus))
+				.list();
+
+	}
+
+	private int getMaxJobapplicationID() {
+
+		int maxValue = 100;
+
+		try {
+
+			maxValue = (Integer) sessionFactory.getCurrentSession()
+					.createQuery("select max(jobappid) from JobApplication").uniqueResult();
+
+		} catch (Exception e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+			return 100;
+
+		}
+
+		return maxValue;
+
+	}
+
+	public boolean isJobOpened(int jobid) {
+
+		Job job = (Job) sessionFactory.getCurrentSession().createCriteria(Job.class)
+				.add(Restrictions.eq("jobid", jobid)).uniqueResult();
+
+		if (job != null && job.getJobStatus() == 'O') {
+
+			return true;
+
+		}
+
+		return false;
+
+	}
+	public boolean saveJobApplication(JobApplication jobApplication) {
+		try {
+			if (isJobOpened(jobApplication.getJobid()) == false) {
+				return false;
+			}
+			// if you already applied, you can not apply again
+			if (isJobAlreadyApplied(jobApplication.getEmail(), jobApplication.getJobid())) {
+				return false;
+			}
+			// if user does not exist, you can not apply
+			if (userDAO.get(jobApplication.getEmail()) == null)
+			{
+				return false;
+			}
+			// if the job does not exist, you can not apply
+			if (getJob(jobApplication.getJobid()) == null)
+			{
+				return false;
+			}
+			jobApplication.setJobappid(getMaxJobapplicationID() + 1);
+			jobApplication.setJobappstatus('N');
+			jobApplication.setApplied_date(new Date());
+			if (jobApplication.getReason() == null || jobApplication.getReason() == " ")
+			{
+				jobApplication.setReason("Interested");
+			}
+			sessionFactory.getCurrentSession().save(jobApplication);
+			return true;
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean updateJobApplication(JobApplication jobApplication) {
+
+		try {
+
+			sessionFactory.getCurrentSession().update(jobApplication);
+
+			return true;
+
+		} catch (HibernateException e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+			return false;
+
+		}
+
+	}
+
+	public List<JobApplication> jobApplicationlist(int jobid) {
+
+		return sessionFactory.getCurrentSession().createCriteria(JobApplication.class)
+				.add(Restrictions.eq("jobid", jobid)).list();
+
+	}
+
+	public List<JobApplication> jobApplicationlist(int jobid, char jobstatus) {
+
+		return sessionFactory.getCurrentSession().createCriteria(Job.class).add(Restrictions.eq("jobstatus", jobstatus))
+				.add(Restrictions.eq("jobid", jobid)).list();
+
+	}
+
+	/**
+	 * 
+	 * This method will return true if the job already applied with this emaild.
+	 * 
+	 * else, return false
+	 * 
+	 */
+
+	public boolean isJobAlreadyApplied(String email, int jobid) {
+
+		// select * from JobApplication where emailID = ? and jobID = ?
+
+		JobApplication jobApplication = (JobApplication) sessionFactory.getCurrentSession()
+
+				.createCriteria(JobApplication.class)
+
+				.add(Restrictions.eq("email", email))
+
+				.add(Restrictions.eq("jobid", jobid)).uniqueResult();
+
+		if (jobApplication == null) {
+
+			return false;
+
+		}
+
+		return true;
+
+	}
+
+	public List<JobApplication> jobApplicationList(String email) {
+		 List<JobApplication> jobApplication = (List<JobApplication>)sessionFactory.getCurrentSession().createCriteria(JobApplication.class)
+				.add(Restrictions.eq("email", email)).list();
+
+		return jobApplication;
+
+	}
+
+	public boolean deleteJob(int jobid) {
+
+		try {
+
+			sessionFactory.getCurrentSession().delete(getJob(jobid));
+
+			return true;
+
+		} catch (HibernateException e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+			return false;
+
+		}
+
+	}
+}

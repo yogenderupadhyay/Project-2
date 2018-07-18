@@ -1,0 +1,32 @@
+<div class="row" data-ng-controller="FriendController">
+	<div class="col-md-12">
+		<div class="col-sm-8 col-sm-offset-2"
+			style="border-bottom: 5px solid red; text-align: center;">
+			<h1 data-ng-show="errPendingfriendRequest==302">No Friend Requests</h1>
+			<h2 data-ng-show="errPendingfriendRequest==404">Unable to get Friend Requests List</h2>
+			<h3
+				data-ng-hide="errPendingfriendRequest==404 || errPendingfriendRequest==302">List
+				Of Friend Requests</h3>
+		</div>
+		<div class="col-md-8 col-sm-offset-2">
+			<div style="border-bottom: double;">
+				<form style="border: 1px solid #000;" action=""
+					data-ng-hide="errPendingfriendRequest==404 || errPendingfriendRequest==302">
+					<table class="table">
+							<tr style="font: bold;">
+							<td>Friend Name</td>
+							<td style="text-align: center;">Operation</td>
+							</tr>
+						<tr data-ng-repeat="friend in pendingFriendRequests" >
+							<td data-ng-controller="UserController"><a href="" data-ng-click="getUserDetails(friend.friendUserName)">{{friend.friendUserName}}</a></td>
+							<td><input type="submit"
+								data-ng-click="deleteFriendRequest(friend.friendId)" value="Delete Request" /></td>
+							<td><input type="submit"
+								data-ng-click="acceptFriendRequest()" value="Accept Request" /></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,116 @@
+package com.project.middleware.restController;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.project.LetsTalk.dao.JobDAO;
+import com.project.LetsTalk.model.Job;
+import com.project.LetsTalk.model.JobApplication;
+
+@RestController
+public class JobController {
+	@Autowired
+	JobDAO jobDAO;
+
+
+	// ---------------- Add Job -----------------------------------
+
+	@PostMapping(value = "/addJob")
+	public ResponseEntity<Job> postJob(@RequestBody Job job) {
+		if (jobDAO.saveJob(job)) {
+			System.out.println("==========>Job details added successfully..");
+			return new ResponseEntity<Job>(job, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Job>(job, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	// -----------------list All Jobs ---------------------------------
+
+	@GetMapping(value = "/listAllJobs")
+	public ResponseEntity<List<Job>> listJob() {
+		List<Job> listJobs = jobDAO.jobList();
+		System.out.println("==========> Job details retrieved<==========");
+		if (listJobs.size() != 0) {
+			return new ResponseEntity<List<Job>>(listJobs, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<Job>>(listJobs, HttpStatus.NOT_FOUND);
+		}
+	}
+	//-------------------Delete Job------------------------------------
+	@DeleteMapping(value="/deleteJob/{jobID}")
+	public ResponseEntity<Job> deleteJob(@PathVariable int jobID){
+		Job job = jobDAO.getJob(jobID);
+		if(job==null) {
+			return new ResponseEntity<Job>(job, HttpStatus.NOT_FOUND);
+		}
+		jobDAO.deleteJob(jobID);
+		return new ResponseEntity<Job>(job,HttpStatus.OK);
+		
+	}
+	// ------------------Update Job -----------------------------------
+
+	@PutMapping("jobUpdate")
+	public ResponseEntity<Job> updateJob(@RequestBody Job job) {
+		if (jobDAO.getJob(job.getJobid()) == null) {
+			return new ResponseEntity<Job>(job, HttpStatus.NOT_FOUND);
+		}
+	//if user existed
+		if(	jobDAO.updateJob(job) )
+		  {
+			return new ResponseEntity<Job>(job, HttpStatus.OK);
+		  }
+			return new ResponseEntity<Job>(job, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	// -----------------------Get Job ------------------------------------
+
+	@GetMapping(value = "/getJob/{jobId}")
+	public ResponseEntity<Job> getJob(@PathVariable("jobId") int jobId) {
+		System.out.println("Get Job " + jobId);
+		Job job = jobDAO.getJob(jobId);
+		if (job == null) {
+			System.out.println("Job retrieval failure..");
+			return new ResponseEntity<Job>(job, HttpStatus.NOT_FOUND);
+		} else {
+			System.out.println("<==========Job retrieved========>");
+			return new ResponseEntity<Job>(job, HttpStatus.OK);
+		}
+	}
+	
+	// ---------------- Apply Job -----------------------------------
+
+		@PostMapping(value = "/applyJob")
+		public ResponseEntity<JobApplication> addJob(@RequestBody JobApplication applyJob) {
+			if (jobDAO.saveJobApplication(applyJob)) {
+				System.out.println("==========> Job applied successfully..");
+				return new ResponseEntity<JobApplication>(applyJob, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<JobApplication>(applyJob, HttpStatus.NOT_FOUND);
+			}
+		}
+		// -----------------list applied Jobs ---------------------------------
+
+		@GetMapping(value = "/listAppliedJobs/{email}")
+		public ResponseEntity<List<JobApplication>> listAppliedJob(@PathVariable("email") String email) {
+			List<JobApplication> listAppliedJobs = jobDAO.jobApplicationList(email);
+			System.out.println("==========> Job details retrieved<==========");
+			if (listAppliedJobs.size() != 0) {
+				return new ResponseEntity<List<JobApplication>>(listAppliedJobs, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<JobApplication>>(listAppliedJobs, HttpStatus.NOT_FOUND);
+			}
+		}
+}
+
+

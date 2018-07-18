@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+<style type="text/css">
+.background{
+background-image: url('resources/img/login.jpg'); 
+background-size: cover;
+ }
+</style>
+</head>
+<body ng-app="myApp" class="background">
+<div class="container" ng-Controller="UserController">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<h1 class="well">
+				<font face="Monotype Corsiva">Login Form</font>
+			</h1>
+			<form action="">
+				<div class="form-group well">
+					<label>Login Name</label> <input type="text" name="loginname"
+						ng-model="User.emailID" placeholder="Enter User Name Here.."
+						class="form-control"> <label>Password </label> <input
+						type="password" name="password" ng-model="User.password"
+						placeholder="Enter Password Here.." class="form-control">
+					<button type="button" ng-click="checklogin()"
+						class="btn btn-lg btn-info">LOGIN</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+</body>
+</html>

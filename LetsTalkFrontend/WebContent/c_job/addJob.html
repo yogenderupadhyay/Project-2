@@ -1,0 +1,34 @@
+<div class="container" id="forum-box" data-ng-Controller="JobController">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-header">
+					<h1>Create Jobs</h1>
+				</div>
+				<form role="form" method="post">
+					<div class="form-group">
+						<label for="jobTitle"> Job Title</label> <input type="text"
+							placeholder="Job Title" name="jobTitle" data-ng-model="job.jobTitle"
+							class="form-control input-lg" id="jobTitle">
+					</div>
+					<div class="form-group">
+
+						<label for="jobDescription"> Job Description </label>
+						<textarea rows="6" cols="24" class="form-control input-lg" id="jobDescription"
+							placeholder="Job Description" name="jobDescription"
+							data-ng-model="job.jobDescription"></textarea>
+					<label>Qualification</label> <input type="text" name="qualification"
+						data-ng-model="job.jobQualification" placeholder="Enter qualification required for job.."
+						class="form-control">
+						<label>Salary</label> <input type="text" name="salary"
+						data-ng-model="job.jobSalary" placeholder="Enter salary .."
+						class="form-control">
+						<label>No Of Openings</label> <input type="text" name="noOfOpenings"
+						data-ng-model="job.noOfOpenings" placeholder="Enter number of openings.."
+						class="form-control">
+					</div>
+					<button type="submit" class="btn btn-primary" value="Insert Job"
+						data-ng-click="insertJob()">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>

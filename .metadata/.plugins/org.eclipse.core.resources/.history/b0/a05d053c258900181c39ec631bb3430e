@@ -1,0 +1,69 @@
+myApp.controller("FriendController",function($scope, $http, $location, $rootScope) {
+					$scope.friend = {
+						"userName" : '',
+						"friendUserName" : '',
+						"status" : ''
+					};
+					$scope.pendingFriendRequest;
+					$scope.suggestedFriends;
+
+//****************************************send friend request*****************************************
+					$scope.sendFriendRequest=function(){
+						console.log('send friend request')
+						$scope.friend.friendUserName=$rootScope.userDetail.emailID;
+						$scope.friend.userName=$rootScope.currentUser.emailID;
+						$http.post('http://localhost:8085/LetsTalkMiddleware/sendFriendRequest',
+										$scope.friend).then(function(response) {
+									alert('Friend Request Send');
+								});
+					}
+			
+//***************************************Friend List***********************************************
+					function friendList() {
+						console.log('Friend List');
+						$http.get("http://localhost:8085/LetsTalkMiddleware/showFriendList/")
+								.then(function(response) {
+									$rootScope.friendList = response.data;
+									console.log($rootScope.friendList);
+								});
+					}
+//*************************************suggested friends List*******************************************
+					function suggestedFriends() {
+						console.log('Suggested Friend');
+						$http.get("http://localhost:8085/LetsTalkMiddleware/showSuggestedFriend")
+								.then(function(response) {
+									$rootScope.suggestedFriends = response.data;
+									console.log($rootScope.suggestedFriends);
+								});
+					}
+//************************************pending friend list***********************************************
+					function pendingFriendRequest() {
+						console.log('Pending Friend Request');
+						$http.get("http://localhost:8085/LetsTalkMiddleware/showPendingRequests")
+								.then(
+										function(response) {
+											$scope.pendingFriendRequests = response.data;
+											console.log($scope.pendingFriendRequest);
+										});
+					}
+//*************************************accept friend request***********************************
+					$scope.acceptFriendRequest = function(friendId) {
+						console.log('Accept Friend Request');
+						$http.get(
+								"http://localhost:8085/LetsTalkMiddleware/acceptFriendRequest/"
+										+ friendId).then(function(response) {
+
+						});
+					}
+//*************************************delete friend request**********************************
+					$scope.deleteFriendRequest = function(friendId) {
+						console.log('Delete Friend Request');
+						$http.get(
+								"http://localhost:8085/LetsTalkMiddleware/deleteFriendRequest/"
+										+ friendId).then(function(response) {
+
+						});
+					}
+					friendList();
+					suggestedFriends();
+				});

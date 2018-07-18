@@ -1,0 +1,48 @@
+<div class="container-fluid" data-ng-controller="JobController">
+		<div class="row">
+			<div class="col-md-12">
+			<div class="col-sm-4 col-sm-offset-4" style=" border-bottom: 5px solid red;">
+					<h3 >List of All Job</h3></div>
+			<div class="col-md-8 col-sm-offset-2">
+			<div style=" border-bottom: double;" data-ng-repeat="job in aplliedJobs">
+			<form style="border : 1px solid #000;" action="">
+						<table class="table-condensed" style="width: 100%">
+							<tr>
+								<td class="col-md-3" style="width: 3%">Job Id</td>
+								<td style="width: 2%">:</td>
+								<td class="col-md-3" style="color: white; width: 95%;">{{job.jobid}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Job Title :</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{job.jobTitle}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Job Qualification</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{job.jobQualification}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Status</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{job.jobStatus}}</td>
+							</tr>
+							<tr>
+								<td colspan="3">		
+									 <input 
+									type="button" class="btn btn-primary links" value="Delete"
+									data-ng-click="deleteJob(job.jobid)" />
+
+									 <a href="#!viewJob"> <input
+									type="button" class="btn btn-primary links" value="View Job"
+									data-ng-click="getJob(job.jobid)" /></a></td>
+							</tr>
+						</table>
+				</form>
+			</div>
+				</div>
+				</div>
+		</div>
+	</div>
+
+	

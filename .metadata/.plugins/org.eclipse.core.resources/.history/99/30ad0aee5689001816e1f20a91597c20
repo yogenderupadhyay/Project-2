@@ -1,0 +1,58 @@
+<div class="container-fluid show-job" data-ng-controller="JobController">
+<div class="row">
+<h1 style="border-bottom-style: ridge; border-bottom-color: coral; border-bottom-width: 7px; margin">
+{{currentJob.jobTitle}}</h1>
+ 
+                <blockquote  style="border-bottom-style:outset; border-bottom-width: 4px;">
+                <p> {{currentJob.jobDescription}} </p> 
+                <footer class="text-right">posted by&nbsp;
+              <span>
+              <a href="" data-ng-click="">Apply Job</a>
+              <a href="" data-ng-click="">Delete Job</a>
+              <a href="" data-ng-click=""> Job</a>
+              </span>
+  </blockquote>
+  <table class="table-condensed" style="width: 100%">
+							<tr>
+								<td valign="top" class="col-xs-3" style="width: 5%">Blog Id</td>
+								<td valign="top" style="width: 2%">:</td>
+								<td valign="top" class="col-xs-3" style="color: white; width: 93%;">{{blog.blogId}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-xs-3">Blog Name :</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{blog.blogTitle}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-xs-3">Blog Content</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{blog.blogContent}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-xs-3">Status</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{blog.status}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-xs-3">Likes</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{blog.blogLikes}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-xs-3">Dislikes</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{blog.blogDislikes}}</td>
+							</tr>
+							<tr>
+								<td valign="top" colspan="3"><a href="#!editBlog"><input type="submit"
+									class="btn btn-primary links" value="Edit Blog"
+									data-ng-click="getBlog(blog.blogId)" /> </a><input type="button"
+									class="btn btn-primary links" value="Delete Blog"
+									data-ng-click="deleteBlog(blog.blogId)" /><a href="#!showBlog"> <input
+									type="button" class="btn btn-primary links" value="Open Blog"
+									data-ng-click="getBlogDetails(blog.blogId)" /></a></td>
+							</tr>
+						</table>
+</div>
+
+</div>

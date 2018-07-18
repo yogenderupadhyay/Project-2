@@ -1,0 +1,67 @@
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LetsTalk</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-cookies.js"></script>
+	<script src="RouteConfig.js"></script>
+	<script src="c_user/UserController.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Custom styles for this template -->
+	<link rel="stylesheet" href="resources/css/lt-styles.css"/>
+  </head>
+
+  <body ng-app="myApp" style="background-image: url('resources/img/login.jpg'); background-size: cover; opacity: 0.5;">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-sm bg-light" class="active">
+  <div class="container-fluid row">
+    <div class="navbar-header col-sm-6">
+      <a class="navbar-brand" href="index.html"><img src="resources/img/logo.jpg" height="50" width="100"/></a>
+   </div>
+   <div class="navbar-header col-sm-6">
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="#!"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li><a href="#/Register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#/Login"><span class="glyphicon glyphicon-log-in"></span> login</a></li>
+        <li><a href="$"><span class="glyphicon glyphicon-shopping-cart"></span>About Us </a></li>
+        <li><a href="$"><span class="glyphicon glyphicon-shopping-cart"></span>Contact Us </a></li>
+      </ul>
+    </div>
+     </div>
+</nav> 
+<!-- <div style="background-image: url('resources/img/login.jpg'); background-size: cover; opacity: 0.5;"> -->
+<div class="container" ng-Controller="UserController">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<h1 class="well">
+				<font face="Monotype Corsiva">Login Form</font>
+			</h1>
+			<form>
+				<div class="form-group well">
+					<label>Login Name</label> <input type="text" name="loginname"
+						ng-model="User.emailID" placeholder="Enter User Name Here.."
+						class="form-control"> <label>Password </label> <input
+						type="password" name="password" ng-model="User.password"
+						placeholder="Enter Password Here.." class="form-control">
+					<button type="button" ng-click="checklogin()"
+						class="btn btn-lg btn-info">LOGIN</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- </div> -->
+</body>
+</html>
+
