@@ -27,17 +27,18 @@ myApp.controller("UserController", function($scope, $http, $rootScope,
 				});
 
 	}
-	$scope.uploadProfilePic=function(){
+/*	$scope.uploadProfilePic=function(){
 		console.log('inside upload profile picture')
 		$http.post('http://localhost:8085/LetsTalkMiddleware/doUpload')
 		.then(function(response){
-			alert('profile piture uploaded successfully')
+			alert('profile piture uploaded successfully');
+			$location.path("/uploadProfilePicture");
 		},function(response)
 		{
 
 			alert('cannot upload picture try again ')
 		});
-	}
+	}*/
 
 	$scope.checklogin = function() {
 		alert("Checking Login Process");
@@ -74,10 +75,15 @@ myApp.controller("UserController", function($scope, $http, $rootScope,
 		console.log('emailID :'+emailID);
 		$http.get('http://localhost:8085/LetsTalkMiddleware/getUser/'+emailID+'.')
 		.then(function(response) {
+			if($rootScope.currentUser!=undefined){
 			$scope.User = response.data;
 			$rootScope.userDetail = $scope.User;
 			$cookieStore.put('userDetail',response.data);
 			$location.path("/displayProfile");
+			}else{
+				alert('login to view user details');
+				$location.path("/login");
+			}
 	}, function(response)
 
 	{

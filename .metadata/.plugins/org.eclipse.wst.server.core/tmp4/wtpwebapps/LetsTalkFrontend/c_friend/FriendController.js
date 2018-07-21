@@ -1,21 +1,21 @@
 myApp.controller('FriendController',function($scope, $http, $location, $rootScope) {
-					$scope.friend = {
-						"userName" : '',
-						"friendUserName" : '',
-						"status" : ''
+					$scope.Friend = {
+						userName : '',
+						friendUserName : '',
+						status : ''
 					};
 					$scope.User = {
-							"firstName" : "",
-							"lastName" : "",
-							"emailID" : "",
-							"password" : "",
-							"gender" : '',
-							"mobile" : '',
-							"d_o_b" : '',
-							"role":'',
-							"status": '',
-							"reason":'',
-							"registeredDate": ''
+							firstName : '',
+							lastName : '',
+							emailID : '',
+							password : '',
+							gender : '',
+							mobile : '',
+							d_o_b : '',
+							role :'',
+							status : '',
+							reason :'',
+							registeredDate : ''
 						};
 					
 					$scope.pendingFriendRequest;
@@ -64,6 +64,7 @@ myApp.controller('FriendController',function($scope, $http, $location, $rootScop
 									$rootScope.suggestedFrnd = response.data;
 									console.log(response.status);
 									console.log($rootScope.suggestedFrnd);
+									console.log('User : '+$rootScope.suggestedFrnd.emailID);
 									}
 								},function(response){
 									$rootScope.errSuggestedFriends=response.status;

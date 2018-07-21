@@ -1,0 +1,21 @@
+<div class="row" data-ng-controller="FriendController">
+<div class="col-md-12">
+			<div class="col-sm-8 col-sm-offset-2" style=" border-bottom: 5px solid red;text-align: center;">
+					<h1 data-ng-show="errSuggestedfriends==302">No Friend Suggestions for you</h1>
+					<h2 data-ng-show="errSuggestedfriends==404">Unable to get suggested friend lists try again later</h2>
+					<h3 data-ng-hide="errSuggestedfriends==404 || errSuggestedfriends==302">List Of Suggested Friends</h3></div>
+			<div class="col-md-8 col-sm-offset-2">
+			<div style=" border-bottom: double;">
+			<form style="border : 1px solid #000;" action="" data-ng-hide="errSuggestedfriends==404 || errSuggestedfriends==302">
+						<table class="table">
+		<tr><td>User Name</td><td>Operation</td></tr>
+		<tr data-ng-repeat="User in suggestedFrnd">
+			<td><h1>{{User}}</h1></td>
+			<td><input type="submit" value="Send Request" data-ng-click="sendFriendRequest(frd.emailId)"/></td>
+		</tr>
+	</table>
+	</form>
+	</div>
+	</div>
+	</div>
+	</div>

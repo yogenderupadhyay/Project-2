@@ -91,7 +91,26 @@ form{
 table tr td {
 	valign:"top";
 }
+.show-blogs{
+	text-align:center;
+	color:black;
+	border-radius: 2px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+	background: rgba(0, 0, 0, 0.2);
+}
+.show-blog-link {
+	font-size: 20px;
+	font-weight: bold;
+	color: white;
+}
 
-.show-blog{
-background-color:white;
+.show-blogs a:hover{
+	color:white;
+	background-color:#1c5992;
+}}
+
+.show-blogs a { 
+	text-align: center;
+	color: white;
+	
 }

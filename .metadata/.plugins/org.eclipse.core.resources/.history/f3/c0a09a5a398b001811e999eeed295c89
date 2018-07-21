@@ -1,0 +1,84 @@
+<div class="container-fluid" data-ng-controller="BlogController" style="background-color: white;">
+	<div class="row" >
+	<div class="col-sm-4 col-sm-offset-4" style=" border-bottom: 5px solid red; text-align: center;">
+					<h3 >List of Created Blogs</h3></div></div>
+		<div class="row">
+		<div class="col-xs-2">
+			<a href="" data-ng-click="showNewBlogs()"
+				style="bacbackground-color: black;">Show New Blogs</a> <a href=""
+				data-ng-click="showApprovedBlogs()">Show Approved Blogs</a> <a
+				href="" data-ng-click="showRejectedBlogs()">Show Rejected Blogs</a>
+		</div>
+		
+			<div class="col-xs-10">
+			
+			<div class=" row col-xs-8 col-sm-offset-1">
+			<div style=" border-bottom: double;" data-ng-repeat="blog in blogData">
+			<form style="border : 1px solid #000;" action="">
+						<table class="table-condensed" style="width: 100%">
+							<tr>
+								<td class="col-md-3" style="width: 3%">Blog Id</td>
+								<td style="width: 2%">:</td>
+								<td class="col-md-3" style="color: white; width: 95%;">{{blog.blogId}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Blog Name :</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{blog.blogTitle}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Blog Content</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{blog.blogContent}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Status</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{blog.status}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Likes</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{blog.blogLikes}}</td>
+							</tr>
+							<tr>
+								<td class="col-md-3">Dislikes</td>
+								<td>:</td>
+								<td class="col-md-3" style="color: white;">{{blog.blogDislikes}}</td>
+							</tr>
+							<tr>
+								<td colspan="3"><input type="submit"
+									class="btn btn-primary links" value="Like"
+									data-ng-click="incrementLike(blog.blogId)" />
+									
+									<input type="submit" class="btn btn-primary links"
+									value="Dislike" data-ng-click="incrementDislike(blog.blogId)" />
+
+									<a href="#!showBlog"> <input type="button"
+										class="btn btn-primary links" value="Comments"
+										data-ng-click="getBlog(blog.blogId)" /></a> 
+										
+										<a href="#!showBlog" data-ng-show="currentUser.role=='ADMIN'">
+										<input type="button" class="btn btn-primary links"
+										value="Delete" data-ng-click="deleteBlog(blog.blogId)" /></a> 
+								
+								<input data-ng-show="currentUser.role=='ADMIN'" type="button"
+									class="btn btn-primary links" value="Approve Blog"
+									data-ng-click="approveBlog(blog.blogId)" /> 
+									
+								<input data-ng-show="currentUser.role=='ADMIN'" type="button"
+									class="btn btn-primary links" value="Reject Blog"
+									data-ng-click="rejectBlog(blog.blogId)" />
+									
+									</td>
+							</tr>
+						</table>
+				</form>
+			</div>
+				</div>
+				</div>
+				</div>
+		</div>
+	</div>
+
+	

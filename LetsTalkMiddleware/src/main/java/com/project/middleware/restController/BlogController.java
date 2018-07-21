@@ -120,13 +120,15 @@ public class BlogController {
 		public ResponseEntity<Blog> approveBlog(@PathVariable("blogId") int blogId) {
 			System.out.println("Approve Blog with Blog ID: " + blogId);
 			Blog blog = blogDAO.getBlog(blogId);
+			
 			if (blog == null) {
-				System.out.println("Not blog with blog Id: " + blogId + " found for Approval");
 				return new ResponseEntity<Blog>(blog, HttpStatus.NOT_FOUND);
-			} else {
-				blog.setStatus('A');
-				blogDAO.approvedBlog(blog.getBlogId());
+			} 
+			if(blog!=null) {
+				blogDAO.approvedBlog(blogId);
 				return new ResponseEntity<Blog>(blog, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<Blog>(blog, HttpStatus.BAD_REQUEST);
 			}
 		}
 
@@ -139,10 +141,13 @@ public class BlogController {
 			if (blog == null) {
 				System.out.println("Not blog with blog Id: " + blogId + " found for Approval");
 				return new ResponseEntity<Blog>(blog,HttpStatus.NOT_FOUND);
-			} else {
+			} 
+			if(blog!=null) {
 				blog.setStatus('R');
 				blogDAO.rejectBlog(blog.getBlogId());
 				return new ResponseEntity<Blog>(blog, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<Blog>(blog, HttpStatus.BAD_REQUEST);
 			}
 		}
 	
@@ -174,10 +179,14 @@ public class BlogController {
 				@GetMapping(value = "/listNewBlogs")
 				public ResponseEntity<List<Blog>> listNewBlog() {
 					List<Blog> listBlogs = blogDAO.newBlogList();
+					
+					if(listBlogs.size()==0) {
+						return new ResponseEntity<List<Blog>>(listBlogs,HttpStatus.NOT_FOUND);
+					}
 					if (listBlogs.size() != 0) {
 						return new ResponseEntity<List<Blog>>(listBlogs, HttpStatus.OK);
 					} else {
-						return new ResponseEntity<List<Blog>>(listBlogs, HttpStatus.NOT_FOUND);
+						return new ResponseEntity<List<Blog>>(listBlogs, HttpStatus.BAD_REQUEST);
 					}
 				}
 //------------------------------Like blog -----------------------------------------

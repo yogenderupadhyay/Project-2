@@ -1,7 +1,7 @@
 <div class="container-fluid" data-ng-controller="JobController">
 		<div class="row">
 			<div class="col-md-12">
-			<div class="col-sm-4 col-sm-offset-4" style=" border-bottom: 5px solid red;">
+			<div class="col-sm-4 col-sm-offset-4" style=" border-bottom: 5px solid red;text-align: center;">
 					<h3 >List of All Job</h3></div>
 			<div class="col-md-8 col-sm-offset-2">
 			<div style=" border-bottom: double;" data-ng-repeat="job in jobData">
@@ -13,7 +13,7 @@
 								<td class="col-md-3" style="color: white; width: 95%;">{{job.jobid}}</td>
 							</tr>
 							<tr>
-								<td class="col-md-3">Job Title :</td>
+								<td class="col-md-3" >Job Title :</td>
 								<td>:</td>
 								<td class="col-md-3" style="color: white;">{{job.jobTitle}}</td>
 							</tr>

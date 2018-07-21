@@ -33,27 +33,31 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 				});
 			};
 			
-//****************************************fetch all blog***********************************************
-			$scope.fetchAllBlog=function() 
+//****************************************show all blog***********************************************
+			$scope.showAllBlogs=function() 
 			{
 				console.log('Fetch All Blogs');
 				$http.get("http://localhost:8085/LetsTalkMiddleware/listBlogs")
 				.then(function(response)
 				{
-					
 					$rootScope.blogData=response.data;
+					$rootScope.title='All Blogs';
+					$cookieStore.put('title',$rootScope.title);
+					$cookieStore.put('blogData', $rootScope.blogData);
 					console.log($scope.blogData);
+					$location.path("/showAllBlogs")
 				});
 			}
-			$scope.fetchAllBlog();
-//***************************************fecth my blogs************************************************
-			$scope.myBlog=function(){
+//***************************************show my blogs************************************************
+			$scope.showMyBlogs=function(){
 				console.log("fetch all my blogs")
 				$http.get("http://localhost:8085/LetsTalkMiddleware/listBlogsOfUser/"+$scope.currentUser.emailID+".")
 				.then(function(response) {
-					$rootScope.myBlogs=response.data;
-					 console.log($scope.myBlogs);
-					 $location.path("/showMyBlogs");
+					$rootScope.blogData=response.data;
+					$cookieStore.put('blogData', $rootScope.blogData);
+					$rootScope.title='Your Blogs';
+					$cookieStore.put('title',$rootScope.title);
+					console.log($scope.blogData);
 				},function(response)
 
 				{
@@ -66,11 +70,18 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 			$scope.getBlog = function(blogId) {
 				$http.get('http://localhost:8085/LetsTalkMiddleware/getBlog/' + blogId)
 						.then(function(response) {
+							if($rootScope.currentUser!=undefined){
 							console.log(response.status);
 							$scope.blog=response.data;
 							$rootScope.currentBlog = $scope.blog;
 							$cookieStore.put('blogDetails',$scope.blog);
 							console.log($rootScope.currentBlog.blogId);
+							$location.path("/showBlog")
+							}
+							else{
+								alert('login to view details')
+								$location.path("/login")
+							}
 						});
 			};
 
@@ -184,11 +195,123 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 //*************************************approve blog********************************************
 			$scope.approveBlog=function(blogId){
 				console.log('inside approve Blog');
-				$http.get('localhost:8085/LetsTalkMiddleware/approveBlog/'+blogId)
+				console.log(blogId);
+				$http.put('http://localhost:8085/LetsTalkMiddleware/approveBlog/'+blogId)
 				.then(function(response){
-						alert('blog accepted succesfully');
+						if(response.status==200){
+						alert('blog with Blog Id : '+blogId+' Approved succesfully');
 						$window.location.reload();
+						}
+						
+						if(response.status==404){
+							alert('No blog with blog Id: '+blogId)
+						}
+						},function(response){
+							alert('cannot approve blog right now , please try again later');
 						});
 
 			}
+			
+//*************************************reject blog********************************************
+			$scope.rejectBlog=function(blogId){
+				console.log('inside reject Blog');
+				console.log(blogId);
+				$http.put('http://localhost:8085/LetsTalkMiddleware/rejectBlog/'+blogId)
+				.then(function(response){
+						if(response.status==200){
+						alert('blog with Blog Id : '+blogId+' Rejectd succesfully');
+						$window.location.reload();
+						}
+						
+						if(response.status==404){
+							alert('No blog with blog Id: '+blogId)
+						}
+						},function(response){
+							alert('cannot reject blog right now , please try again later');
+						});
+
+			}
+			
+//***********************************Show All New Blogs******************************************
+			$scope.showNewBlogs=function(){
+				console.log('inside new blog');
+				$http.get('http://localhost:8085/LetsTalkMiddleware/listNewBlogs')
+						.then(function(response)
+								{
+									if(response.status=200){
+									$rootScope.blogData=response.data;
+									console.log($scope.blogData);
+									$rootScope.title='New Blogs';
+									$cookieStore.put('title',$rootScope.title);
+									$cookieStore.put('blogData', $rootScope.blogData);
+									$location.path("/showAllBlogs")
+									}
+								if(response.status==404){
+									alert('No New Blogs');
+								}
+								},function(response){
+									alert('cannot get new blogs try again Later');
+								});
+							}
+			
+			//***********************************Show All Rejected Blogs******************************************
+			$scope.showRejectedBlogs=function(){
+				console.log('inside reject blog');
+				$http.get('http://localhost:8085/LetsTalkMiddleware/listRejectedBlogs')
+						.then(function(response)
+								{
+									if(response.status=200){
+									$rootScope.blogData=response.data;
+									console.log($scope.blogData);
+									$rootScope.title='Rejected Blogs';
+									$cookieStore.put('title',$rootScope.title);
+									$cookieStore.put('blogData', $rootScope.blogData);
+									$location.path("/showAllBlogs")
+									}
+								if(response.status==404){
+									alert('No Rejected Blogs');
+								}
+								},function(response){
+									alert('cannot get rejected blogs try again Later');
+								});
+							}
+			
+			//***********************************Show All Approved Blogs******************************************
+			$scope.showApprovedBlogs=function(){
+				console.log('inside approved blog');
+				$http.get('http://localhost:8085/LetsTalkMiddleware/listApprovedBlogs')
+						.then(function(response)
+								{
+									if(response.status=200){
+									$rootScope.blogData=response.data;
+									$cookieStore.put('blogData', $rootScope.blogData);
+									$rootScope.homeBlogData=response.data;
+									$cookieStore.put('homeBlogData', $rootScope.homeBlogData);
+									console.log($scope.blogData);
+									$rootScope.title='Approved Blogs';
+									$cookieStore.put('title',$rootScope.title);
+									$location.path("/showAllBlogs")
+									}
+								if(response.status==404){
+									alert('No Approved Blogs');
+								}
+								},function(response){
+									alert('cannot get approveded blogs try again Later');
+								});
+							}
+			
+			//***********************************home Blogs******************************************
+			$scope.homeBlogs=function(){
+				console.log('inside approved blog');
+				$http.get('http://localhost:8085/LetsTalkMiddleware/listApprovedBlogs')
+						.then(function(response)
+								{
+									if(response.status=200){
+									$rootScope.homeBlogData=response.data;
+									$cookieStore.put('homeBlogData', $rootScope.homeBlogData);
+									$location.path("/")
+									}
+								},function(response){
+								});
+							}
 });

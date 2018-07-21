@@ -1,0 +1,21 @@
+<div class="row" data-ng-controller="FriendController">
+<div class="col-md-12">
+			<div class="col-sm-8 col-sm-offset-2" style=" border-bottom: 5px solid red;text-align: center;">
+					<h1 data-ng-show="errFriendList==302">You have no friends</h1>
+					<h2 data-ng-show="errFriendList==404">Unable to get friend lists try again later</h2>
+					<h3 data-ng-hide="errFriendList==404 || errFriendList==302">List Of All Friends</h3></div>
+			<div class="col-md-8 col-sm-offset-2">
+			<div style=" border-bottom: double;" data-ng-hide="errFriendList==404 || errFriendList==302" >{{friendList}}
+			<form style="border : 1px solid #000;" action="">
+						<table class="table" style="width: 100%">
+						<tr><td>Friend Name</td><td>Operation</td></tr>
+		<tr data-ng-repeat="friend in friendList">
+			<td>{{friend.friendUserName}}{{friend}}</td>
+			<td><input type="submit" value="Delete Request"/></td>
+		</tr>
+	</table>
+	</form>
+	</div>
+	</div>
+	</div>
+	</div>

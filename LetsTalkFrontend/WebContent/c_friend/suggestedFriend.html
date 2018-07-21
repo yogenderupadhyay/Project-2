@@ -9,8 +9,8 @@
 			<form style="border : 1px solid #000;" action="" data-ng-hide="errSuggestedfriends==404 || errSuggestedfriends==302">
 						<table class="table">
 		<tr><td>User Name</td><td>Operation</td></tr>
-		<tr data-ng-repeat="frd in suggestedFrnd">
-			<td><h1>{{frd.firstName}}</h1></td>
+		<tr data-ng-repeat="User in suggestedFrnd">
+			<td><h1>{{User.lastName}}</h1></td>
 			<td><input type="submit" value="Send Request" data-ng-click="sendFriendRequest(frd.emailId)"/></td>
 		</tr>
 	</table>

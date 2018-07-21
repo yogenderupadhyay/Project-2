@@ -36,11 +36,14 @@ myApp.run(function($rootScope,$cookieStore)
 				{
 				$rootScope.currentUser=$cookieStore.get('userDetails');
 				}
-				if($rootScope.currentBlog==undefined || $rootScope.blogComments==undefined)
+				if($rootScope.currentBlog==undefined || $rootScope.blogComments==undefined ||$rootScope.blogData==undefined ||$rootScope.homeBlogData==undefined)
 				{
 				$rootScope.currentBlog=$cookieStore.get('blogDetails');
 				$rootScope.blogComments=$cookieStore.get('blogCommentsList');
+				$rootScope.blogData=$cookieStore.get('blogData');
+				$rootScope.homeBlogData=$cookieStore.get('homeBlogData');
 				}
+				
 				if($rootScope.currentJob==undefined){
 				$rootScope.currentJob=$cookieStore.get('jobDetails');
 				}

@@ -47,7 +47,7 @@
    </div>
    <div class="navbar-header col-xs-6" align="right">
       <ul class="navbar-nav ml-auto list-unstyled">
-      <li class="nav-item "><a  href="#!/"> Home</a></li>
+      <li class="nav-item "><a  href="#!/" data-ng-controller="BlogController" data-ng-click="homeBlogs()"> Home</a></li>
         <li  data-ng-show="currentUser==undefined"><a  href="#!/register">Sign Up</a></li>
         <li  data-ng-show="currentUser==undefined"><a  href="#!/login">login</a></li>
         <li  data-ng-show="currentUser==undefined"><a  href="$">About Us </a></li>
@@ -67,7 +67,7 @@
 						<button class="dropdown-toggle" data-toggle="dropdown" >Friend
      					 <span class="caret"></span></button>
         				<ul class="dropdown-menu dropdown-content">
-          					<li><a href="#!showAllFriends" data-ng-click="friendList()">Friends List</a></li>
+          					<li><a href="#!showAllFriends" data-ng-click="friendsList()">Friends List</a></li>
           					<li><a href="#!suggestedFriend" data-ng-click="suggestedFriends()" >Suggested Friend</a></li>
           					<li><a href="" data-ng-click="pendingFriendRequest()">Pending Friend Request</a></li>
           				</ul>
@@ -77,9 +77,7 @@
      					 <span class="caret"></span></button>
         				<ul class="dropdown-menu dropdown-content" data-ng-controller="BlogController" >
           					<li><a href="#!addBlog">Create Blog</a></li>
-          					<li><a href="" data-ng-click="myBlog()">Show My Blogs</a></li>
-          					<li><a href="#!showAllBlogs" data-ng-click="fetchAllBlog()">Show All Blogs</a></li>
-          					<li><a href="#!manageBlog" data-ng-click="manageBlog()">Manage Blogs</a></li>
+          					<li><a href="" data-ng-click="showAllBlogs()">View Blogs</a></li>
           				</ul>
        </li>
        <li  data-ng-hide="currentUser==undefined" ><img class="img-circle" data-ng-hide="currentUser==undefined"  
@@ -103,7 +101,7 @@
 
 <br/>
 	<!-- Content -->
-	<div class="container content" data-ng-view></div>
+	<div class="container content" data-ng-view ></div>
 	</div>
 	<br><br>
 	<!-- Footer -->
