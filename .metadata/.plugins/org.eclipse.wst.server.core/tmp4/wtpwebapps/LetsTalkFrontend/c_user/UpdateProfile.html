@@ -1,8 +1,8 @@
-<div class="container" data-data-ng-Controller="currentUserController">
+<div class="container" data-ng-Controller="UserController">
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3">
 			<h1 class="well Text-Center">
-				<font face="Monotype Corsiva">Update currentUser</font>
+				<font face="Monotype Corsiva">Update current User</font>
 			</h1>
 			<form>
 				<div class="form group well">
@@ -31,10 +31,10 @@
 							class="form-control"  data-ng-model="currentUser.mobile"
 							placeholder="Enter your mobile number" name="mobile">
 					
-						<label>Date of Birth:</label> <input type="text"
-							class="form-control" data-ng-model="{{currentUser.d_o_b}}" placeholder="mm/dd/yy" name="dob">
+						<!-- <label>Date of Birth:</label> <input type="date"
+							class="form-control" data-ng-model="{{currentUser.d_o_b}}" placeholder="mm/dd/yy" name="dob"> -->
 					
-					<button type="button" data-ng-click="updateUserDetails()"
+					<button type="submit" data-ng-click="updateUserDetails()"
 						class="btn btn-lg btn-info center">Update Details</button>
 				</div>
 			</form>

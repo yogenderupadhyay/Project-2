@@ -1,25 +1,21 @@
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\ForumDAOImpl.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\Message.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\BlogComment.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\UserDAOImpl.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\ProfilePictureDAOImpl.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\ProfilePictureDAO.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\Forum.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\ProfilePicture.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\JobDAO.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\FrienDAOImpl.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\User.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\FriendDAO.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\BlogDAO.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\ForumDAO.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\OutputMessage.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\JobApplication.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\config\DBConfig.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\ForumComment.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\Blog.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\BlogDAOImpl.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\App.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\JobDAOImpl.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\UserDAO.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\Friend.java
-F:\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\Job.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\ProfilePictureDAOImpl.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\ProfilePictureDAO.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\config\DBConfig.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\BlogDAOImpl.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\Job.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\ProfilePicture.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\FriendDAO.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\Blog.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\BlogComment.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\UserDAOImpl.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\User.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\BlogDAO.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\UserDAO.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\Friend.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\App.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\Message.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\dao\JobDAO.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\FriendDAOImpl.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\JobApplication.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\model\OutputMessage.java
+F:\eclipse oxygen workspaces\collobration\LetsTalkBackend\src\main\java\com\project\LetsTalk\daoimpl\JobDAOImpl.java

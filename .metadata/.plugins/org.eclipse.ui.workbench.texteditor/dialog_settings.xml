@@ -2,29 +2,35 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Reject" key="selection"/>
+		<item value="UserController" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="UserController"/>
+			<item value="ng-"/>
+			<item value="friendname"/>
+			<item value="loginname"/>
+			<item value="&lt;td"/>
+			<item value="&lt;td "/>
+			<item value="Reject"/>
+			<item value="Rejected"/>
+			<item value="rejected"/>
+			<item value="reject"/>
+			<item value="New"/>
+			<item value="new"/>
 			<item value="Approve"/>
 			<item value="approve"/>
 			<item value="&lt;String&gt;"/>
-			<item value="Close"/>
-			<item value="close"/>
-			<item value="job."/>
-			<item value="blog"/>
-			<item value="Blog"/>
-			<item value="currentJob"/>
-			<item value="jon"/>
-			<item value="NoOfOopenings"/>
-			<item value="noOfOopenings"/>
-			<item value="Titile"/>
-			<item value="Name"/>
-			<item value="content"/>
 		</list>
 		<list key="replacehistory">
+			<item value="data-ng-"/>
+			<item value="friendUserName"/>
+			<item value="userName"/>
+			<item value="&lt;td valign=&quot;top&quot;"/>
+			<item value="Approved"/>
+			<item value="approved"/>
 			<item value="Reject"/>
 			<item value="reject"/>
 			<item value="&lt;Friend&gt;"/>
@@ -34,12 +40,6 @@
 			<item value="&lt;JobApplication"/>
 			<item value="currentJob."/>
 			<item value="job"/>
-			<item value="Job"/>
-			<item value="currentJob"/>
-			<item value="jon"/>
-			<item value="NoOfOpenings"/>
-			<item value="noOfOpenings"/>
-			<item value="Title"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

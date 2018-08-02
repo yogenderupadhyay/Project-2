@@ -41,7 +41,7 @@ public class BlogDAOImpl implements BlogDAO {
 	public boolean addBlog(Blog blog) {
 		try {
 			blog.setBlogId(getMaxBlogID() + 1);
-			blog.setDateCreated(new Date());
+			blog.setDateCreated(new Date(System.currentTimeMillis()));
 			blog.setStatus('N');
 			sessionFactory.getCurrentSession().save(blog);
 		} catch (Exception e) {

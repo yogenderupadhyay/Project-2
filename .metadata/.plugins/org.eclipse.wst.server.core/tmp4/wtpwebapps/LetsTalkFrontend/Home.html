@@ -20,7 +20,7 @@
 	<div  data-ng-repeat="blog in homeBlogData" style="border-bottom-style: ridge;">
 	<a href="" data-ng-click="getBlog(blog.blogId)"><h1 >{{blog.blogTitle}}</h1></a>
 	<p>{{blog.blogContent}}</p>
-	<footer class="text-right">posted by<a href="" data-ng-controller="UserController" data-ng-click="getUserDetails(blog.emailId)"> {{blog.emailId}}</a> on {{blog.dateCreated}}</footer>
+	<footer class="text-right ">posted by<a href="" data-ng-controller="UserController" data-ng-click="getUserDetails(blog.emailId)"> {{blog.emailId}}</a> on {{blog.dateCreated}}</footer>
 	</div>
 	</div>
 	</div>

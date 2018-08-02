@@ -1,0 +1,127 @@
+
+<!DOCTYPE html><html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LetsTalk</title>
+    
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  	
+	  	
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<script src="resources/js/angular-route.js"></script>
+		<script src="resources/js/angular-cookies.js"></script>
+		<script src="resources/js/RouteConfig.js" type="text/javascript">
+		</script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.3/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.js"></script>
+
+		<script src="c_user/UserController.js" type="text/javascript"></script>
+		<script src="c_user/MyController.js" type="text/javascript">		</script>
+		<script src="c_blog/BlogController.js" type="text/javascript" ></script>
+		<script type="text/javascript" src="c_chat/ChatController.js"></script>
+		<script type="text/javascript" src="c_chat/ChatService.js"></script>
+		<script type="text/javascript" src="c_friend/FriendController.js"></script>
+		<script src="c_job/JobController.js" type="text/javascript">
+		</script>
+    <!-- Custom styles for this template -->
+	<link rel="stylesheet" href="resources/css/lt-styles.css"/>
+  </head>
+
+  <body data-ng-app="myApp" >
+    <!-- Navigation -->
+    <div style="background-image:url('resources/img/bg.jpg');">
+    <nav class="navbar navbar-expand-sm bg-light" >
+  <div class="container row">
+    <div class="navbar-header col-xs-6">
+      <a class="navbar-brand logo" href="index.html"><img src="resources/img/logo.jpg" height="50" width="100"/></a>
+   </div>
+   <div class="navbar-header col-xs-6" align="right">
+      <ul class="navbar-nav ml-auto list-unstyled">
+      <li class="nav-item "><a  href="#!/" data-ng-controller="BlogController" data-ng-click="homeBlogs()"> Home</a></li>
+        <li  data-ng-show="currentUser==undefined"><a  href="#!/register">Sign Up</a></li>
+        <li  data-ng-show="currentUser==undefined"><a  href="#!/login">login</a></li>
+        <li  data-ng-show="currentUser==undefined"><a  href="$">About Us </a></li>
+        <li  data-ng-show="currentUser==undefined"><a  href="$">Contact Us </a></li>
+      	<li  data-ng-hide="currentUser==undefined"><a  href="#!chat">Chat Room </a></li>
+      	<li  data-ng-hide="currentUser==undefined" class="dropdown" data-ng-controller="JobController">
+						<button class="dropdown-toggle" data-toggle="dropdown" >Job
+     					 <span class="caret"></span></button>
+        				<ul class="dropdown-menu dropdown-content">
+        					<li data-ng-show="currentUser.role=='ADMIN'"><a href="#!addJob">Post Job</a></li>
+          					<li data-ng-hide="currentUser.role=='ADMIN'"><a href="#!showAppliedJobs" data-ng-click="showAppliedJobs()">Applied Jobs</a></li>
+          					<li><a href="#!showAllJob" data-ng-click="fetchAllJob()" >All Jobs</a></li>
+          					<li><a href="#!pendingFriend" data-ng-click="pendingFriendRequest()"></a></li>
+          				</ul>
+       </li>
+      	<li  data-ng-hide="currentUser==undefined" class="dropdown" data-ng-controller="FriendController">
+						<button class="dropdown-toggle" data-toggle="dropdown" >Friend
+     					 <span class="caret"></span></button>
+        				<ul class="dropdown-menu dropdown-content">
+          					<li><a href="#!showAllFriends" data-ng-click="friendsList()">Friends List</a></li>
+          					<li><a href="#!suggestedFriend" data-ng-click="suggestedFriends()" >Suggested Friend</a></li>
+          					<li><a href="#!pendingFriend" data-ng-click="pendingFriendRequest()">Pending Friend Request</a></li>
+          					<li><a href="#!sentFriendRequest" data-ng-click="sentFriendRequest()">Sent Friend Request</a></li>
+          				</ul>
+       </li>
+					<li data-ng-hide="currentUser==undefined" class="dropdown"  >
+						<button class="dropdown-toggle" data-toggle="dropdown" >Blog
+     					 <span class="caret"></span></button>
+        				<ul class="dropdown-menu dropdown-content" data-ng-controller="BlogController" >
+          					<li><a href="#!addBlog">Create Blog</a></li>
+          					<li><a href="" data-ng-click="showAllBlogs()">View Blogs</a></li>
+          				</ul>
+       </li>
+       <li  data-ng-show="currentUser !=undefined && currentUser.gender=='M'" data-ng-show="currentUser.gender=='M'">
+       
+          <img
+               class="img-circle userImg" src="http://localhost:8085/LetsTalkMiddleware/getImage/{{currentUser.emailID}}."
+				alt="avatar" onerror=this.src="resources/img/Male.png"></img>
+
+		</li>
+		
+		<li  data-ng-show="(currentUser!=undefined) && (currentUser.gender =='F')">{{currentUser.gender}}
+         <img
+               class="img-circle userImg" src="http://localhost:8085/LetsTalkMiddleware/getImage/{{currentUser.emailID}}."
+				alt="avatar" onerror=this.src="resources/img/Female.png"></img>
+		</li>
+       <li data-ng-hide="currentUser==undefined" class="dropdown ">
+						<button class="dropdown-toggle nav-item navbar-right" data-toggle="dropdown" style="float:right;" >Welcome {{currentUser.firstName}}
+     					 <span class="caret"></span></button>
+     					 
+        				<ul class="dropdown-menu dropdown-content" data-ng-controller="UserController">
+          					<li><a href="" data-ng-click="getUserDetails(currentUser.emailID)">View Profile</a></li>
+          					<li><a href="#!updateProfile">Update Profile</a></li>
+        					<li><a href="#!uploadProfilePicture">Upload Profile Picture</a></li>
+          					<li><a href="" data-ng-click="logout()"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+          				</ul>    				
+      </li>
+      </ul>
+    </div>
+     </div>
+</nav> 
+
+<br/>
+	<!-- Content -->
+	<div class="container-fluid" data-ng-view ></div>
+	</div>
+	<br><br>
+	<!-- Footer -->
+	<footer >
+		<div class="container" style="background-color:#09496d;height:40px;color:white;text-align:center;padding:10px; position:fixed;bottom:0px; width:100%;" >
+			<span>&copy; 2018 Copyright:LetsTalk.com
+			<a href="http://www.facebook.com" class="fa fa-facebook" style="font-size:20px; color:#d6e5fc; "></a>
+			<a href="http://www.twitter.com" class="fa fa-twitter" style="font-size:20px;color:#d6e5fc;"></a>	 </span>
+		</div>
+	</footer>
+</body>
+</html>

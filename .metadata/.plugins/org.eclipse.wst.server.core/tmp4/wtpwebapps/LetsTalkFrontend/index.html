@@ -40,7 +40,7 @@
   <body data-ng-app="myApp" >
     <!-- Navigation -->
     <div style="background-image:url('resources/img/bg.jpg');">
-    <nav class="navbar navbar-expand-sm bg-light" >
+    <nav class="navbar bg-light" >
   <div class="container row">
     <div class="navbar-header col-xs-6">
       <a class="navbar-brand logo" href="index.html"><img src="resources/img/logo.jpg" height="50" width="100"/></a>
@@ -50,8 +50,8 @@
       <li class="nav-item "><a  href="#!/" data-ng-controller="BlogController" data-ng-click="homeBlogs()"> Home</a></li>
         <li  data-ng-show="currentUser==undefined"><a  href="#!/register">Sign Up</a></li>
         <li  data-ng-show="currentUser==undefined"><a  href="#!/login">login</a></li>
-        <li  data-ng-show="currentUser==undefined"><a  href="$">About Us </a></li>
-        <li  data-ng-show="currentUser==undefined"><a  href="$">Contact Us </a></li>
+        <li  data-ng-show="currentUser==undefined"><a  href="#!aboutUs">About Us </a></li>
+        <li  data-ng-show="currentUser==undefined"><a  href="#!contactUs">Contact Us </a></li>
       	<li  data-ng-hide="currentUser==undefined"><a  href="#!chat">Chat Room </a></li>
       	<li  data-ng-hide="currentUser==undefined" class="dropdown" data-ng-controller="JobController">
 						<button class="dropdown-toggle" data-toggle="dropdown" >Job
@@ -69,7 +69,8 @@
         				<ul class="dropdown-menu dropdown-content">
           					<li><a href="#!showAllFriends" data-ng-click="friendsList()">Friends List</a></li>
           					<li><a href="#!suggestedFriend" data-ng-click="suggestedFriends()" >Suggested Friend</a></li>
-          					<li><a href="" data-ng-click="pendingFriendRequest()">Pending Friend Request</a></li>
+          					<li><a href="#!pendingFriend" data-ng-click="pendingFriendRequest()">Pending Friend Request</a></li>
+          					<li><a href="#!sentFriendRequest" data-ng-click="sentFriendRequest()">Sent Friend Request</a></li>
           				</ul>
        </li>
 					<li data-ng-hide="currentUser==undefined" class="dropdown"  >
@@ -77,12 +78,22 @@
      					 <span class="caret"></span></button>
         				<ul class="dropdown-menu dropdown-content" data-ng-controller="BlogController" >
           					<li><a href="#!addBlog">Create Blog</a></li>
-          					<li><a href="" data-ng-click="showAllBlogs()">View Blogs</a></li>
+          					<li><a href="#!showAllBlogs" data-ng-click="showAllBlogs()">View Blogs</a></li>
           				</ul>
        </li>
-       <li  data-ng-hide="currentUser==undefined" ><img class="img-circle" data-ng-hide="currentUser==undefined"  
-					src="http://localhost:8085/LetsTalkMiddleware/getImage/{{currentUser.emailID}}."
-					alt="avatar" onerror=this.src="resources/img/user.png" style=" width: 40px;height: 40px;border: 2px solid white;float: right; "></img></li>
+       <li  data-ng-show="currentUser !=undefined && currentUser.gender=='M'" data-ng-show="currentUser.gender=='M'">
+       
+          <img
+               class="img-circle userImg" src="http://localhost:8085/LetsTalkMiddleware/getImage/{{currentUser.emailID}}."
+				alt="avatar" onerror=this.src="resources/img/Male.png"></img>
+
+		</li>
+		
+		<li  data-ng-show="(currentUser!=undefined) && (currentUser.gender =='F')">{{currentUser.gender}}
+         <img
+               class="img-circle userImg" src="http://localhost:8085/LetsTalkMiddleware/getImage/{{currentUser.emailID}}."
+				alt="avatar" onerror=this.src="resources/img/Female.png"></img>
+		</li>
        <li data-ng-hide="currentUser==undefined" class="dropdown ">
 						<button class="dropdown-toggle nav-item navbar-right" data-toggle="dropdown" style="float:right;" >Welcome {{currentUser.firstName}}
      					 <span class="caret"></span></button>
@@ -101,12 +112,12 @@
 
 <br/>
 	<!-- Content -->
-	<div class="container content" data-ng-view ></div>
+	<div class="container-fluid" data-ng-view ></div>
 	</div>
 	<br><br>
 	<!-- Footer -->
 	<footer >
-		<div class="container-fluid" style="background-color:#09496d;height:40px;color:white;text-align:center;padding:10px; position:fixed;bottom:0px; width:100%;" >
+		<div class="container" style="background-color:#09496d;height:40px;color:white;text-align:center;padding:10px; position:fixed;bottom:0px; width:100%;" >
 			<span>&copy; 2018 Copyright:LetsTalk.com
 			<a href="http://www.facebook.com" class="fa fa-facebook" style="font-size:20px; color:#d6e5fc; "></a>
 			<a href="http://www.twitter.com" class="fa fa-twitter" style="font-size:20px;color:#d6e5fc;"></a>	 </span>

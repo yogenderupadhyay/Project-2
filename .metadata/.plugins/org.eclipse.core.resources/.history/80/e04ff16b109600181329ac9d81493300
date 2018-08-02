@@ -1,0 +1,82 @@
+<div class="container-fluid" data-ng-controller="BlogController">
+	<div  class="row">
+		<div class="col-xs-12 nav show-blogs"><h3>
+			<a href="#!showAllBlogs"data-ng-show="currentUser.role=='ADMIN'" data-ng-click="showNewBlogs()"><span class="show-blog-link">Show New Blogs</span></a>&nbsp;| 
+			
+			<a  href="#!showAllBlogs"data-ng-click="showApprovedBlogs()"><span class="show-blog-link">Show Approved Blogs</span></a>&nbsp; |
+		    
+		    <a  href="#!showAllBlogs" data-ng-click="showRejectedBlogs()" ><span class="show-blog-link">Show Rejected Blogs</span></a>&nbsp;|
+		    
+		    <a  href="#!showAllBlogs"data-ng-click="showMyBlogs()"><span class="show-blog-link">Show My Blogs</span></a>&nbsp;|
+		    
+		    <a  href="#!showAllBlogs"data-ng-click="showAllBlogs()"><span class="show-blog-link">Show All Blogs</span></a>
+		</h3></div>
+			<div class="col-sm-12" style="margin-bottom:5px; text-align: center;">
+	<h1  style=" border-bottom-color:#1c5992; border-bottom-width: 1px; ">{{title}}</h1></div></div>
+			<div class="col-xs-12">
+			
+			<div class=" row col-xs-8 col-sm-offset-2">
+			<div style=" border-bottom: double;" data-ng-repeat="blog in blogData">
+			<form style="border : 1px solid #000;" action="">
+						<table class="table-condensed" style="width: 100%; " valign="top">
+							<tr>
+								<td valign="top" class="col-md-3" style="width: 3%">Blog Id</td>
+								<td valign="top" style="width: 2%">:</td>
+								<td valign="top" class="col-md-3" style="color: white; width: 95%;">{{blog.blogId}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-md-3">Blog Name :</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-md-3" style="color: white;">{{blog.blogTitle}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-md-3">Blog Content</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-md-3" style="color: white;"><p>{{blog.blogContent}}</p></td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-md-3">Status</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-md-3" style="color: white;">{{blog.status}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-md-3">Likes</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-md-3" style="color: white;">{{blog.blogLikes}}</td>
+							</tr>
+							<tr>
+								<td valign="top" class="col-md-3">Dislikes</td>
+								<td valign="top">:</td>
+								<td valign="top" class="col-md-3" style="color: white;">{{blog.blogDislikes}}</td>
+							</tr>
+							<tr>
+								<td valign="top" colspan="3" style="color: blue;">
+								 <a href="#!showAllBlogs"
+									data-ng-click="incrementLike(blog.blogId)" >Like</a>
+									
+									<a href="#!showAllBlogs" data-ng-click="incrementDislike(blog.blogId)" >Dislike</a>
+
+									<a href="#!showAllBlogs"
+										data-ng-click="getBlog(blog.blogId)" >View Blog</a> 
+										
+										
+										<a href="#!showBlog" data-ng-show="currentUser.role=='ADMIN'" data-ng-click="deleteBlog(blog.blogId)" >Delete</a> 
+								
+								<a href="#!showAllBlogs"
+									data-ng-click="approveBlog(blog.blogId)" >Approve</a> 
+									
+								<a href="#!showAllBlogs"
+									data-ng-click="rejectBlog(blog.blogId)">Reject</a>
+									
+									</td>
+							</tr>
+						</table>
+				</form>
+			</div>
+				</div>
+				</div>
+				</div>
+		</div>
+	</div>
+
+	

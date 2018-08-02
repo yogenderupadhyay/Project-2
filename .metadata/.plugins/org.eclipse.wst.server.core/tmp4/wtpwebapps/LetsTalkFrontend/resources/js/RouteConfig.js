@@ -25,6 +25,9 @@ myApp.config(function($routeProvider)
         	.when("/showAllFriends",{templateUrl:"c_friend/showAllFriends.html"})
         	.when("/suggestedFriend",{templateUrl:"c_friend/suggestedFriend.html"})
         	.when("/pendingFriend",{templateUrl:"c_friend/pendingFriend.html"})
+        	.when("/sentFriendRequest",{templateUrl:"c_friend/sentFriendRequest.html"})
+        	.when("/aboutUs",{templateUrl:"aboutus.html"})
+        	.when("/contactUs",{templateUrl:"contactus.html"})
 		});
 
 myApp.run(function($rootScope,$cookieStore)

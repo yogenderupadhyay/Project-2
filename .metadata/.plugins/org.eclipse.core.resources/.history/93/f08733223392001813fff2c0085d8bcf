@@ -1,0 +1,47 @@
+<div class="container-fluid show-blog" data-ng-controller="BlogController" style="background-color: white;">
+<div class="row">
+<h1 style="border-bottom-style: ridge; border-bottom-color: coral; border-bottom-width: 7px; margin">
+{{currentBlog.blogTitle}}</h1>
+ 
+                <blockquote  style="border-bottom-style:outset; border-bottom-width: 4px;">
+                <p> {{currentBlog.blogContent}} </p> 
+                <footer class="text-right">posted by&nbsp;
+                <span data-ng-controller="UserController"><a href="" data-ng-click="getUserDetails(currentBlog.emailId)">{{currentBlog.emailId}}</a>
+                </span> on {{currentBlog.dateCreated | date:'MM/dd/yyyy'}} at {{currentBlog.dateCreated | date:'HH:mm:ss'}}</footer>            
+  <br>
+  <br>
+  <b>{{blogComments.length}} &nbsp; Comments</b>
+  </blockquote>
+ 
+  <!-- begin comment box -->
+ <div class="row col-sm-10 col-sm-offset-1" style="background: rgba(0, 0, 0, 0.2);margin-top: -20px;border-bottom-style: ridge;">
+ <form class="form-horizontal" data-ng-hide="currentUser==undefined" style="background-color: transparent;">
+    <div class="form-group form-group-lg" >
+     <div class="col-sm-1" > 
+     	<label class="control-label" style="text-align: center; margin-left: 20px;">
+     				<img class="img-circle" data-ng-hide="currentUser==undefined"  
+					src="http://localhost:8085/LetsTalkMiddleware/getImage/{{currentUser.emailID}}."
+					alt="avatar" onerror=this.src="resources/img/user.png" style=" width: 40px;height: 40px;border: 2px solid white;float: right; "></img>
+     </label></div>
+     <div class="col-sm-9"> <input type="text" id="lg" class="form-control" placeholder="enter your comment here" data-ng-model=blogComment.commentText></div>
+     <div class="col-sm-2"><input type="button" class="btn btn-primary btn-lg"  data-ng-click="addBlogComment()"value="comment"></div>
+    </div>
+ </form>
+ </div>
+ <!-- end comment box -->
+ <div class="row col-sm-12" data-ng-repeat="blogComment in blogComments">
+  <cite class="text-left" style="margin-top: -15px;color: black;" data-ng-controller="UserController">
+  <img class="img-circle" data-ng-hide="currentUser==undefined"  
+					src="http://localhost:8085/LetsTalkMiddleware/getImage/{{blogComment.emailId}}."
+					alt="avatar" onerror=this.src="resources/img/user.png" style=" width: 40px;height: 40px;border: 2px solid white;float: left: ; "></img>
+  <a href="" data-ng-click="getUserDetails(blogComment.emailId)">{{blogComment.emailId}}</a></cite>
+ <blockquote style=" ">
+
+ <p style="margin-left: 30px;"> {{blogComment.commentText}}</p>
+ <footer class="text-right">posted on {{blogComment.commentDate| date:'MM/dd/yyyy'}} at {{blogComment.commentDate|date:'HH:mm:ss'}}</footer>
+ <a href="" data-ng-show="currentUser.role=='ADMIN' || currentUser.emailID==blogComment.emailId" data-ng-click="deleteBlogComments(blogComment.blogCommentId)">delete</a>
+ </blockquote>
+ </div>
+</div>
+
+</div>

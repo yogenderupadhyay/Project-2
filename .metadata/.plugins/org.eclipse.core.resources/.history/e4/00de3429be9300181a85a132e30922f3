@@ -1,0 +1,132 @@
+package com.project.LetsTalk.daoimpl;
+
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.project.LetsTalk.dao.FriendDAO;
+import com.project.LetsTalk.model.Friend;
+import com.project.LetsTalk.model.User;
+
+@Repository("friendDAO")
+@Transactional
+public class FriendDAOImpl implements FriendDAO {
+	@Autowired
+	SessionFactory sessionFactory;
+	
+//****************************************** get max friend id	****************************************************************
+	private int getMaxFriendID() {
+		int maxValue = 100;
+		try {
+				maxValue = (Integer) sessionFactory.getCurrentSession().createQuery("select max(friendId) from Friend").uniqueResult();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return 100;
+			}
+		System.out.println(maxValue);
+			return maxValue;
+	}
+//********************************************list of friends*************************************************************
+	@Override
+	public List<Friend> friendList(String userName) {
+		return sessionFactory.getCurrentSession().createQuery("from Friend where (userName='"+userName+"' AND status='Accepted')").list();
+	}
+//*****************************************List of pending friend request*****************************************************
+	@Override
+	public List<Friend> pendingFriendRequestList(String userName) {
+		return sessionFactory.getCurrentSession().createQuery("from Friend where (userName='"+userName+"' AND status='Pending')").list();
+	}
+//***************************************List of suggested friend request**************************************************
+	
+	
+		@Override
+	public List<User> suggestedPeopleList(User user) {
+			Session session=sessionFactory.openSession();
+			System.out.println("inside friend dao impl");
+			SQLQuery query=session.createSQLQuery("select * from c_user where email_ID not in (select friendUserName from c_friend where userName !=?)");
+			query.setString(0,user.getEmailID());
+			query.addEntity(User.class);
+			List<User> users=query.list();
+			session.close();
+			return users;
+	}
+	
+	//**************************************send friend request*******************************************************
+	@Override
+	public boolean sendFriendRequest(Friend friend) {
+		try
+		{	
+			friend.setFriendId(getMaxFriendID()+1);
+			friend.setStatus("Pending");
+			sessionFactory.getCurrentSession().save(friend);
+			return true;
+      		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
+//*****************************************accept friend request**************************************
+	@Override
+	public boolean acceptFriendRequest(int friendId) {
+		try {
+			Session session = sessionFactory.openSession();
+			Friend friend = (Friend) session.get(Friend.class, friendId);
+			friend.setStatus("Accepted");
+			sessionFactory.getCurrentSession().update(friend);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+//***********************************************delete friend request*********************************************
+	@Override
+	public boolean deleteFriend(int friendId) {
+		try {
+			Friend friend = sessionFactory.getCurrentSession().get(Friend.class, friendId);
+			sessionFactory.getCurrentSession().delete(friend);
+			return true;
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+//************************************************get friend********************************************
+	@Override
+	public Friend getFriend(int friendId) {
+		return sessionFactory.getCurrentSession().get(Friend.class, friendId);
+	}
+//**************************************is friend request already sent*************************************
+
+	public boolean isFriendRequestAlreadySent(Friend friend) {
+		System.out.println("inside is Friend Request Already Sent"+ friend.getFriendUserName()+" "+friend.getUserName());
+		Friend temp =(Friend) sessionFactory.getCurrentSession().createCriteria(Friend.class)
+				.add(Restrictions.eq("userName", friend.getFriendUserName()))
+				.add(Restrictions.eq("friendUserName", friend.getUserName())).uniqueResult();
+		if(temp!=null) {
+			return true;
+		}
+		return false;
+	}
+	
+//***********************************already Have Friend Request*****************************************
+	public boolean alreadyHaveFriendRequest(Friend friend) {
+		System.out.println("inside already Have Friend Request"+ friend.getFriendUserName()+" "+friend.getUserName());
+		Friend temp =(Friend) sessionFactory.getCurrentSession().createCriteria(Friend.class)
+				.add(Restrictions.eq("userName", friend.getUserName()))
+				.add(Restrictions.eq("friendUserName", friend.getFriendUserName())).uniqueResult();
+		if(temp!=null) {
+			return true;
+		}
+		return false;
+	}
+}

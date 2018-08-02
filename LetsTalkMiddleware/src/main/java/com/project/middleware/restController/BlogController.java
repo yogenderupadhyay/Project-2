@@ -235,7 +235,7 @@ public class BlogController {
   //--------------------------------------Delete BlogComment---------------------------------------------------
 
 				@DeleteMapping(value = "/deleteBlogComment/{commentId}")
-				public ResponseEntity<String> deleteBlogComment(@PathVariable("commentId") int commentId) {
+				public ResponseEntity<String> deleteBlogComments(@PathVariable("commentId") int commentId) {
 					System.out.println("Delete blogComment with comment Id: " + commentId);
 					BlogComment blogComment = blogDAO.getBlogComment(commentId);
 					if (blogComment == null) {

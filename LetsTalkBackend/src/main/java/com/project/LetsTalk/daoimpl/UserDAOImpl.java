@@ -22,6 +22,8 @@ public class UserDAOImpl  implements UserDAO {
 	private SessionFactory sessionFactory;
 	@Autowired
 	private User user;
+	
+//******************************************register user*******************************************************
 	public boolean save(User user) {
 		try {
 			if(user.getRole()==null || user.getRole()=="")
@@ -29,7 +31,7 @@ public class UserDAOImpl  implements UserDAO {
 				user.setRole("USER");
 			}
 			user.setRegisteredDate(new Date(System.currentTimeMillis()) + "");
-			String str=user.getEmailID()+"@LT.COM";
+			String str=user.getEmailID();
 			user.setEmailID(str);
 			user.setStatus('N');
 			sessionFactory.getCurrentSession().save(user);
@@ -40,16 +42,21 @@ public class UserDAOImpl  implements UserDAO {
 			return false;
 		}
 	}
+
+//***********************************************update user*****************************************
 	public boolean update(User user) {
+		System.out.println("inside update method");
 		try {
 			sessionFactory.getCurrentSession().update(user);
 			return true;
 		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
+			System.out.println("error");
 			e.printStackTrace();
 			return false;
 		}
 	}
+
+//**********************************************delete user******************************************
 	public boolean delete(String emaild) {
 		try {
 			user = get(emaild);
@@ -64,12 +71,18 @@ public class UserDAOImpl  implements UserDAO {
 			return false;
 		}
 	}
+//******************************************get user***********************************************
 	public User get(String emailId) {
-	return	(User) sessionFactory.getCurrentSession().get(User.class,emailId);
+	return	(User) sessionFactory.getCurrentSession().createCriteria(User.class)
+			.add(Restrictions.eq("emailID", emailId)).uniqueResult();
 	}
+	
+//******************************************list all user*******************************************
 	public List<User> list() {
 	return	sessionFactory.getCurrentSession().createQuery("from c_user").list();
 	}
+	
+//*****************************************check login*********************************************
 	public User validate(String emailID, String password) {
 		return (User) sessionFactory.getCurrentSession()
 		.createCriteria(User.class)

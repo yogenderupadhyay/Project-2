@@ -1,15 +1,15 @@
 <div class="container-fluid" data-ng-controller="BlogController">
 	<div  class="row">
 		<div class="col-xs-12 nav show-blogs"><h3>
-			<a href="" data-ng-click="showNewBlogs()"><span class="show-blog-link">Show New Blogs</span></a>&nbsp;| 
+			<a href="#!showAllBlogs"data-ng-show="currentUser.role=='ADMIN'" data-ng-click="showNewBlogs()"><span class="show-blog-link">Show New Blogs</span></a>&nbsp;| 
 			
-			<a  href=""data-ng-click="showApprovedBlogs()"><span class="show-blog-link">Show Approved Blogs</span></a>&nbsp; |
+			<a  href="#!showAllBlogs"data-ng-click="showApprovedBlogs()"><span class="show-blog-link">Show Approved Blogs</span></a>&nbsp; |
 		    
-		    <a  href="" data-ng-click="showRejectedBlogs()" ><span class="show-blog-link">Show Rejected Blogs</span></a>&nbsp;|
+		    <a  href="#!showAllBlogs" data-ng-click="showRejectedBlogs()" ><span class="show-blog-link">Show Rejected Blogs</span></a>&nbsp;|
 		    
-		    <a  href=""data-ng-click="showMyBlogs()"><span class="show-blog-link">Show My Blogs</span></a>&nbsp;|
+		    <a  href="#!showAllBlogs"data-ng-click="showMyBlogs()"><span class="show-blog-link">Show My Blogs</span></a>&nbsp;|
 		    
-		    <a  href=""data-ng-click="showAllBlogs()"><span class="show-blog-link">Show All Blogs</span></a>
+		    <a  href="#!showAllBlogs"data-ng-click="showAllBlogs()"><span class="show-blog-link">Show All Blogs</span></a>
 		</h3></div>
 			<div class="col-sm-12" style="margin-bottom:5px; text-align: center;">
 	<h1  style=" border-bottom-color:#1c5992; border-bottom-width: 1px; ">{{title}}</h1></div></div>
@@ -50,28 +50,23 @@
 								<td valign="top" class="col-md-3" style="color: white;">{{blog.blogDislikes}}</td>
 							</tr>
 							<tr>
-								<td valign="top" colspan="3"><input type="submit"
-									class="btn btn-primary links" value="Like"
-									data-ng-click="incrementLike(blog.blogId)" />
+								<td valign="top" colspan="3" style="color: blue;">
+								 <a href="#!showAllBlogs"
+									data-ng-click="incrementLike(blog.blogId)" >Like</a>
 									
-									<input type="submit" class="btn btn-primary links"
-									value="Dislike" data-ng-click="incrementDislike(blog.blogId)" />
+									<a href="#!showAllBlogs" data-ng-click="incrementDislike(blog.blogId)" >Dislike</a>
 
-									<a href=""> <input type="button"
-										class="btn btn-primary links" value="Open Blog"
-										data-ng-click="getBlog(blog.blogId)" /></a> 
+									<a href="#!showBlog"
+										data-ng-click="getBlog(blog.blogId)" >View Blog</a> 
 										
-										<a href="#!showBlog" data-ng-show="currentUser.role=='ADMIN'">
-										<input type="button" class="btn btn-primary links"
-										value="Delete" data-ng-click="deleteBlog(blog.blogId)" /></a> 
+										
+										<a href="#!showAllBlogs" data-ng-show="currentUser.role=='ADMIN'" data-ng-click="deleteBlog(blog.blogId)" >Delete</a> 
 								
-								<input data-ng-show="currentUser.role=='ADMIN'" type="button"
-									class="btn btn-primary links" value="Approve Blog"
-									data-ng-click="approveBlog(blog.blogId)" /> 
+								<a href="#!showAllBlogs"
+									data-ng-click="approveBlog(blog.blogId)" >Approve</a> 
 									
-								<input data-ng-show="currentUser.role=='ADMIN'" type="button"
-									class="btn btn-primary links" value="Reject Blog"
-									data-ng-click="rejectBlog(blog.blogId)" />
+								<a href="#!showAllBlogs"
+									data-ng-click="rejectBlog(blog.blogId)">Reject</a>
 									
 									</td>
 							</tr>

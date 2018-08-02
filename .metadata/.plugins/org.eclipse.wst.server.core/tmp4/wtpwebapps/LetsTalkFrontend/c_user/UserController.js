@@ -10,15 +10,19 @@ myApp.controller("UserController", function($scope, $http, $rootScope,
 		mobile : '',
 		d_o_b : ''
 	}
-
+	$scope.ProfilePic={
+			userName:"",
+			image:""
+	}
+//********************************************Register**********************************************
 	$scope.register = function() {
 
 		$http.post('http://localhost:8085/LetsTalkMiddleware/registerUser',
-				$scope.User).then(function(response) {
+		    $scope.User).then(function(response) {
 			$scope.User = response.data;
 			console.log($scope.User.msg);
 			alert('User Registered Successfully');
-			console.log(response.statusText);
+			$location.path("/login");
 				},function(response)
 
 				{
@@ -27,19 +31,8 @@ myApp.controller("UserController", function($scope, $http, $rootScope,
 				});
 
 	}
-/*	$scope.uploadProfilePic=function(){
-		console.log('inside upload profile picture')
-		$http.post('http://localhost:8085/LetsTalkMiddleware/doUpload')
-		.then(function(response){
-			alert('profile piture uploaded successfully');
-			$location.path("/uploadProfilePicture");
-		},function(response)
-		{
-
-			alert('cannot upload picture try again ')
-		});
-	}*/
-
+	
+//**************************************CHECK LOGIN DETAILS**********************************************
 	$scope.checklogin = function() {
 		alert("Checking Login Process");
 
@@ -58,7 +51,7 @@ myApp.controller("UserController", function($scope, $http, $rootScope,
 		});
 	}
 	
-//****************************logout************************************************
+//*******************************************logout************************************************
 	
 	$scope.logout=function()
 	{
@@ -68,7 +61,7 @@ myApp.controller("UserController", function($scope, $http, $rootScope,
 		$cookieStore.remove('userDetails');
 		$location.path("/login");
 	}
-//****************************get user *********************************************	
+//******************************************get user *********************************************	
 	$scope.getUserDetails=function(emailID)
 	{
 		console.log('inside get User ');
@@ -91,20 +84,20 @@ myApp.controller("UserController", function($scope, $http, $rootScope,
 		alert('USER NO  MORE EXIST')
 	});
    }
-//***************************Update User*********************************************
+//*******************************************Update User*********************************************
 	$scope.updateUserDetails=function(){
 		console.log('inside update user details');
-		$http.put('http://localhost:8085/LetsTalkMiddleware/updateUser',
-				$scope.User).then(function(response) {
+		console.log($rootScope.currentUser);
+		$http.put('http://localhost:8085/LetsTalkMiddleware/userUpdate',$rootScope.currentUser)
+		.then(function(response) {
+			console.log(response.data);		
 			$scope.User = response.data;
 			$rootScope.currentUser=response.data;
-			console.log($scope.User.msg);
+			console.log($rootScope.currentUser);
 			alert('User Updated Successfully');
-			console.log(response.statusText);
 				},function(response)
 
 				{
-
 					alert('Cannot Update Try Again')
 				});
 

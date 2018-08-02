@@ -1,41 +1,57 @@
-myApp.controller('FriendController',function($scope, $http, $location, $rootScope) {
-					$scope.Friend = {
-						userName : '',
-						friendUserName : '',
+myApp.controller('FriendController',function($scope, $http, $location, $rootScope,$cookieStore) {
+					$scope.friend = {
+							friendId: "",
+						userName : "",
+						friendUserName : "",
 						status : ''
 					};
 					$scope.User = {
-							firstName : '',
-							lastName : '',
-							emailID : '',
-							password : '',
+							firstName : "",
+							lastName : "",
+							emailID : "",
+							password : "",
 							gender : '',
 							mobile : '',
-							d_o_b : '',
-							role :'',
-							status : '',
-							reason :'',
-							registeredDate : ''
+							d_o_b : ''
 						};
 					
-					$scope.pendingFriendRequest;
-					$scope.suggestedFrnd;
 
 //****************************************send friend request*****************************************
-					$scope.sendFriendRequest=function(){
-						console.log('send friend request')
-						$scope.friend.friendUserName=$rootScope.userDetail.emailID;
+					$scope.sendFriendRequest=function(emailID){
+						console.log('send friend request');
+						$scope.friend.friendUserName=emailID;
 						$scope.friend.userName=$rootScope.currentUser.emailID;
-						$http.post('http://localhost:8085/LetsTalkMiddleware/sendFriendRequest',
-										$scope.friend).then(function(response) {
+						$http.post('http://localhost:8085/LetsTalkMiddleware/sendFriendRequest',$scope.friend)
+						.then(function(response) {
+								console.log('print response '+response.status);
+								
+								if(response.status==200){
 									alert('Friend Request Send');
+									$scope.suggestedFriends();
+								}
+								},function(response){
+									if(response.status==400){
+										$rootScope.status=response.status;
+										alert('Friend Request Already Send To '+emailID);
+										
+									}
+									if(response.status==302){
+										$rootScope.status=response.status;
+										alert('Already Have Friend Request From '+emailID);
+										$scope.pendingFriendRequest();
+										
+									}
+									if(response.status!=400 && response.status!=302){
+						
+									alert('unable to send friend request');
+									}
 								});
 					}
 			
 //***************************************Friend List***********************************************
-					$scope.friendList=function() {
+					$scope.friendsList=function() {
 						console.log('Friend List'+$rootScope.currentUser.emailID);
-						$http.get('http://localhost:8085/LetsTalkMiddleware/showFriendList/'+$rootScope.currentUser.emailID+'.')
+						$http.post('http://localhost:8085/LetsTalkMiddleware/showFriendList',$rootScope.currentUser)
 								.then(function(response) {
 									if (response.status==302) {
 										$rootScope.errFriendList=response.status;
@@ -53,22 +69,26 @@ myApp.controller('FriendController',function($scope, $http, $location, $rootScop
 					}
 //*************************************suggested friends List*******************************************
 					$scope.suggestedFriends=function() {
+						console.log('inside suggested friend list user='+ $rootScope.currentUser);
+						$scope.User.emailID=$rootScope.currentUser.emailID;
 						console.log('Suggested Friend');
-						$http.get('http://localhost:8085/LetsTalkMiddleware/showSuggestedFriend/'+$rootScope.currentUser.emailID+'.')
+						$http.post('http://localhost:8085/LetsTalkMiddleware/showSuggestedFriend',$scope.User)
 								.then(function(response) {
-									if (response.status==302) {
-										$rootScope.errSuggestedfriends=response.status;
-										aler('No Friend Suggestions for you');
-									}
+									
 									if (response.status==200) {
 									$rootScope.suggestedFrnd = response.data;
 									console.log(response.status);
 									console.log($rootScope.suggestedFrnd);
-									console.log('User : '+$rootScope.suggestedFrnd.emailID);
+									
 									}
 								},function(response){
+									if (response.status==302) {
+										$rootScope.errSuggestedfriends=response.status;
+										alert('No Friend Suggestions for you');
+									}
+									if (response.status!=302) {
 									$rootScope.errSuggestedFriends=response.status;
-									console.log('no friends');
+									console.log('error occured please try again later');}
 								});
 					}
 //************************************pending friend request list***********************************************
@@ -77,18 +97,46 @@ myApp.controller('FriendController',function($scope, $http, $location, $rootScop
 						$http.get('http://localhost:8085/LetsTalkMiddleware/showPendingFriendRequest/'+$rootScope.currentUser.emailID+'.')
 								.then(
 										function(response) {
-											if (response.status==302) {
-												$rootScope.errPendingfriendRequest=response.status;
-												aler('No Friend Suggestions for you');
-											}
+											console.log('status'+response.status);
+											
 											if(response.status==200){
 											$rootScope.pendingFriendRequests = response.data;
 											console.log($scope.pendingFriendRequests);
-											$location.path("/pendingFriend")
 											}
 										},function(response){
+											if (response.status==302) {
+												$rootScope.errPendingfriendRequest=response.status;
+												alert('No Pending Friend Requests');
+											}
+											if (response.status!=302) {
+												$rootScope.errPendingfriendRequest=response.status;
+												alert('Unable to get Pending Friend Requests List');
 											$rootScope.errPendingfriendRequest=response.status;
-											console.log('no friend requests');
+											console.log('no friend requests');}
+										});
+					}
+//************************************sent friend request list***********************************************
+					$scope.sentFriendRequest=function() {
+						console.log('Sent Friend Request'+$rootScope.currentUser.emailID+'.');
+						$http.get('http://localhost:8085/LetsTalkMiddleware/showSentFriendRequest/'+$rootScope.currentUser.emailID+'.')
+								.then(
+										function(response) {
+											console.log('status'+response.status);
+											
+											if(response.status==200){
+											$rootScope.sentFriendRequests = response.data;
+											console.log($scope.sentFriendRequests);
+											}
+										},function(response){
+											if (response.status==302) {
+												$rootScope.errSentfriendRequest=response.status;
+												alert('You Have Not Sended Any Friend Request Yet');
+												$scope.suggestedFriends();
+												$location.path('/suggestedFriend');
+											}
+											if(response.status!=302){
+											$rootScope.errSentfriendRequest=response.status;
+											console.log('no friend requests');}
 										});
 					}
 //*************************************accept friend request***********************************
@@ -103,13 +151,40 @@ myApp.controller('FriendController',function($scope, $http, $location, $rootScop
 						});
 					}
 //*************************************delete friend request**********************************
-					$scope.deleteFriendRequest = function(friendId) {
+					$scope.deleteFriend = function(friendId) {
 						console.log('Delete Friend Request');
+						console.log(friendId);
 						$http.get(
-								"http://localhost:8085/LetsTalkMiddleware/deleteFriendRequest/"
+								"http://localhost:8085/LetsTalkMiddleware/deleteFriend/"
 										+ friendId).then(function(response) {
-											alert('friend request deleted successfully');
+											alert('deleted successfully');
 											$scope.pendingFriendRequest();
+											$scope.friendsList();
+											$scope.sentFriendRequest();
+											
 						});
+					}
+					
+//**********************************show friend details****************************************
+					$scope.showFriendDetails=function(emailID){
+						console.log('inside show friend details');
+						console.log('Friend emailID :'+emailID);
+						$http.get('http://localhost:8085/LetsTalkMiddleware/getUser/'+emailID+'.')
+						.then(function(response) {
+							if($rootScope.currentUser!=undefined){
+							$scope.User = response.data;
+							$rootScope.userDetail = $scope.User;
+							$cookieStore.put('userDetail',response.data);
+							$location.path("/displayProfile");
+							}else{
+								alert('login to view Friend details');
+								$location.path("/login");
+							}
+					}, function(response)
+
+					{
+
+						alert('USER NO  MORE EXIST')
+					});
 					}
 				});

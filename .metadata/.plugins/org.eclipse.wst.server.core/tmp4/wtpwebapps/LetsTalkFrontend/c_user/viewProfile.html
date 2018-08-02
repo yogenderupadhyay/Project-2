@@ -40,14 +40,17 @@
 							<tr>
 								<td valign="top" class="col-xs-3">Date of birth</td>
 								<td valign="top">:</td>
-								<td valign="top" class="col-xs-3" style="color: white;">{{userDetail.d_o_b}}</td>
+								<td valign="top" class="col-xs-3" style="color: white;">{{userDetail.d_o_b | date:'MM/dd/yyyy'}}</td>
 							</tr>
 							
 						</table>
 						<div  data-ng-hide="currentUser.emailID==userDetail.emailID">
-						    <input data-ng-controller="FriendController"
+						    <input data-ng-controller="FriendController" data-ng-hide="status==400 || status==302"
 									type="submit" class="btn btn-primary" value="Send Friend Request"
-									data-ng-click="sendFriendRequest()" />
+									data-ng-click="sendFriendRequest(userDetail.emailID)" />
+							<input data-ng-controller="FriendController" data-ng-show="status==400 || status==302"
+									type="submit" class="btn btn-primary" value="Send Friend Request"
+									data-ng-click="sendFriendRequest(userDetail.emailID)" disabled="disabled" />
      					 </div>
 					</form>
 					</div>

@@ -24,7 +24,8 @@ myApp.controller("JobController", function($scope,$http,$location, $rootScope,$w
 				console.log($scope.job);
 				$http.post('http://localhost:8085/LetsTalkMiddleware/addJob',$scope.job)
 				.then (function(response) {
-					alert('Job Added Success')
+					alert('Job Added Success');
+					$scope.fetchAllJob();
 				$window.location.reload();
 				},function(response)
 
@@ -46,7 +47,6 @@ myApp.controller("JobController", function($scope,$http,$location, $rootScope,$w
 					console.log($scope.jobData);
 				});
 			}
-			$scope.fetchAllJob();
 
 				
 //***************************************get job*****************************************************
@@ -68,6 +68,7 @@ myApp.controller("JobController", function($scope,$http,$location, $rootScope,$w
 				.then(function(response){
 					console.log('updated job'+ $scope.currentJob.jobid+ ' successfully');
 					$window.alert("Job Id : "+$scope.currentJob.jobid +" updated successfully");
+					$scope.fetchAllJob();
 					$location.path("/showAllJob");
 				},function(response){
 					alert('something went wrong');
@@ -82,6 +83,7 @@ myApp.controller("JobController", function($scope,$http,$location, $rootScope,$w
 					$scope.jobApplication=response.data;
 					console.log($scope.jobApplication.statusMessage);
 					$window.alert($scope.jobApplication.statusMessage);
+					$scope.fetchAllJob();
 					$window.location.reload();
 				},function(response)
 
@@ -100,6 +102,7 @@ myApp.controller("JobController", function($scope,$http,$location, $rootScope,$w
 				.then(function(response){
 				$scope.jobApplication=response.data;
 				console.log($scope.jobApplication.statusMessage);
+				$scope.fetchAllJob();
 				alert($scope.jobApplication.statusMessage);
 				},function(response){
 					$scope.jobApplication=response.data;
@@ -115,6 +118,7 @@ myApp.controller("JobController", function($scope,$http,$location, $rootScope,$w
 				.then(function(response){
 					console.log('Job Application deleted ');
 					$window.alert("Job Application Id : "+jobAppId +" deleted successfully");
+					$scope.fetchAllJob();
 					$scope.showAppliedJobs();
 				},function(response)
 
@@ -139,6 +143,7 @@ myApp.controller("JobController", function($scope,$http,$location, $rootScope,$w
 				$http.get('http://localhost:8085/LetsTalkMiddleware/closeJob/'+jobID)
 					.then(function(response){
 						alert('JobId : '+jobID+' closed successfully');
+						$scope.fetchAllJob();
 						$window.location.reload();
 					});
 				}
@@ -148,6 +153,7 @@ myApp.controller("JobController", function($scope,$http,$location, $rootScope,$w
 				$http.get('http://localhost:8085/LetsTalkMiddleware/openJob/'+jobID)
 					.then(function(response){
 						alert('JobId : '+jobID+' open successfully');
+						$scope.fetchAllJob();
 						$window.location.reload();
 					});
 				}

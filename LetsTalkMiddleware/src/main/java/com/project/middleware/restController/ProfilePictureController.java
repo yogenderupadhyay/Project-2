@@ -23,11 +23,12 @@ public class ProfilePictureController {
 	ProfilePictureDAO profileDAO;
 	
 	@RequestMapping(value="/doUpload",method=RequestMethod.POST)
-	public ResponseEntity<?> uploadPicture(@RequestParam(value="file")CommonsMultipartFile fileupload,HttpSession session)
+	public ResponseEntity<?> uploadPicture(@RequestParam(value="fileupload") CommonsMultipartFile fileupload,HttpSession session)
 	{
 
 		User user=(User)session.getAttribute("user");
-		System.out.println("Inside Profile picture controller : ");
+		ProfilePicture profilePicture=new ProfilePicture();
+		System.out.println("Inside Profile picture controller : "+user);
 		
 		if(user==null) 
 		{
@@ -36,7 +37,6 @@ public class ProfilePictureController {
 		else
 		{
 			System.out.println("Uploading the picture..");
-			ProfilePicture profilePicture=new ProfilePicture();
 			profilePicture.setUserName(user.getEmailID());
 			profilePicture.setImage(fileupload.getBytes());
 			profileDAO.save(profilePicture);

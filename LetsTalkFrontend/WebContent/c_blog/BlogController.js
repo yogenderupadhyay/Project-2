@@ -12,7 +12,7 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 					"emailId":'',
 					"blogId":'',
 					"commentText":'',
-					"commentDate":''
+					"commentDate":new Date()
 			}
 			       $scope.blogData;
 			       $scope.myBlogs;
@@ -45,7 +45,6 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 					$cookieStore.put('title',$rootScope.title);
 					$cookieStore.put('blogData', $rootScope.blogData);
 					console.log($scope.blogData);
-					$location.path("/showAllBlogs")
 				});
 			}
 //***************************************show my blogs************************************************
@@ -53,7 +52,7 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 				console.log("fetch all my blogs")
 				$http.get("http://localhost:8085/LetsTalkMiddleware/listBlogsOfUser/"+$scope.currentUser.emailID+".")
 				.then(function(response) {
-					$rootScope.blogData=response.data;
+					$rootScope.blogData=JSON.stringify(response.data);
 					$cookieStore.put('blogData', $rootScope.blogData);
 					$rootScope.title='Your Blogs';
 					$cookieStore.put('title',$rootScope.title);
@@ -74,9 +73,9 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 							console.log(response.status);
 							$scope.blog=response.data;
 							$rootScope.currentBlog = $scope.blog;
+							$scope.getBlogCommentList($scope.blog.blogId);
 							$cookieStore.put('blogDetails',$scope.blog);
 							console.log($rootScope.currentBlog.blogId);
-							$location.path("/showBlog")
 							}
 							else{
 								alert('login to view details')
@@ -118,7 +117,11 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 						'http://localhost:8085/LetsTalkMiddleware/likeBlog/'+ blogId)
 						.then(function(response) {
 							console.log('Incremented likes');
-							$window.location.reload();
+							$scope.getBlog(blogId);
+							$scope.showAllBlogs();
+							$scope.showNewBlogs();
+							$scope.showRejectedBlogs();
+							$scope.showApprovedBlogs();
 						});
 		}
 			//*************************************incrment Dislikes********************************************************
@@ -129,19 +132,26 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 								+ blogId).then(
 						function(response) {
 							console.log('Incremented Islikes');
-							$window.location.reload();
+							$scope.getBlog(blogId);
+							$scope.showAllBlogs();
+							$scope.showNewBlogs();
+							$scope.showRejectedBlogs();
+							$scope.showApprovedBlogs();
 						});
 		}
 			
 			//***************************************delete blogCommentsList*************************************
 
-			$scope.deleteBlogComment=function(blogId){
-				console.log('Into deleteBlogComments '+ blogId);
+			$scope.deleteBlogComments=function(blogCommentId){
+				console.log('Into deleteBlogComments '+ blogCommentId);
 				$http.get(
 						'http://localhost:8085/LetsTalkMiddleware/deleteBlogComment/'
-								+blogId).then(
+								+blogCommentId).then(
 						function(response) {
+								alert('comment deleted');
 							     $scope.getBlogDetails();
+						},function(response){
+							alert('cannot delete comment try again later');
 						});
 			}
 	
@@ -200,7 +210,9 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 				.then(function(response){
 						if(response.status==200){
 						alert('blog with Blog Id : '+blogId+' Approved succesfully');
-						$window.location.reload();
+				
+						$scope.showApprovedBlogs();
+						$location.path("/showAllBlogs");
 						}
 						
 						if(response.status==404){
@@ -220,7 +232,9 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 				.then(function(response){
 						if(response.status==200){
 						alert('blog with Blog Id : '+blogId+' Rejectd succesfully');
-						$window.location.reload();
+						
+						$scope.showRejectedBlogs();
+						$location.path("/showAllBlogs");
 						}
 						
 						if(response.status==404){
@@ -244,7 +258,6 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 									$rootScope.title='New Blogs';
 									$cookieStore.put('title',$rootScope.title);
 									$cookieStore.put('blogData', $rootScope.blogData);
-									$location.path("/showAllBlogs")
 									}
 								if(response.status==404){
 									alert('No New Blogs');
@@ -266,7 +279,6 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 									$rootScope.title='Rejected Blogs';
 									$cookieStore.put('title',$rootScope.title);
 									$cookieStore.put('blogData', $rootScope.blogData);
-									$location.path("/showAllBlogs")
 									}
 								if(response.status==404){
 									alert('No Rejected Blogs');
@@ -290,7 +302,6 @@ myApp.controller("BlogController", function($scope,$http,$location, $rootScope,$
 									console.log($scope.blogData);
 									$rootScope.title='Approved Blogs';
 									$cookieStore.put('title',$rootScope.title);
-									$location.path("/showAllBlogs")
 									}
 								if(response.status==404){
 									alert('No Approved Blogs');

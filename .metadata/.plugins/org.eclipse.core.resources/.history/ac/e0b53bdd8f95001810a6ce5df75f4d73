@@ -1,0 +1,31 @@
+<div class="row" data-ng-controller="FriendController">
+<div class="col-md-12">
+			<div class="col-sm-8 col-sm-offset-2" style=" border-bottom: 5px solid red;text-align: center;">
+					<h1 data-ng-show="errFriendList==302">You have no friends</h1>
+					<h2 data-ng-show="errFriendList==404">Unable to get friend lists try again later</h2>
+					<h3 data-ng-hide="errFriendList==404 || errFriendList==302">List Of All Friends</h3></div>
+			<div class="col-md-8 col-sm-offset-2">
+			<div style=" border-bottom: double;" data-ng-hide="errFriendList==404 || errFriendList==302" >
+			<form style="border : 1px solid #000;" action="">
+						<table class="table" style="width: 100%">
+						<tr><td>Friend Name</td><td>Operation</td></tr>
+		<tr data-ng-repeat="friend in friendList">
+		
+			<td>
+			
+			<img class="img-circle" data-ng-hide="currentUser==undefined"  
+					src="http://localhost:8085/LetsTalkMiddleware/getImage/{{friend.friendUserName}}."
+					alt="avatar" onerror=this.src="resources/img/user.png" style=" width: 40px;height: 40px;border: 2px solid white;float:left; "></img>
+			
+			<a href="" class="links" data-ng-click="showFriendDetails(friend.friendUserName)" style="text-align:inherit;">
+			{{friend.friendUserName}}</a></td>
+
+			<td><input type="submit" value="unfriend" data-ng-click="deleteFriend(friend.friendId)"/>
+			<input type="submit" value="View Details" data-ng-click="showFriendDetails(friend.friendUserName)"/></td>
+		</tr>
+	</table>
+	</form>
+	</div>
+	</div>
+	</div>
+	</div>

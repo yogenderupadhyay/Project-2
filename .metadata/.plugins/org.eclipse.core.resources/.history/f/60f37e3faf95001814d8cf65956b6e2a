@@ -1,0 +1,24 @@
+<div class="container" data-ng-Controller="UserController" style="background-image:url('resources/img/login.jpg'); ">
+
+ <h1 class="well"><center><font face="Monotype Corsiva">Login Form</font></center></h1>
+	<div class="col-lg-12 well">
+	<div class="row">
+				<form style="background: rgba(0, 0, 0, 0.2);">
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								<label>Login Name</label>
+								<input type="text" name="loginname" data-ng-model="User.emailID"  placeholder="Enter User Name Here.." class="form-control">
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Password </label>
+								<input type="password" name="password" data-ng-model="User.password" placeholder="Enter Password Here.." class="form-control">
+							</div>
+						</div>	
+					<div>
+					<button type="button" data-ng-click="checklogin()" class="btn btn-lg btn-info">LOGIN</button>					
+					</div>
+				</form> 
+		</div>
+	</div>
+</div>

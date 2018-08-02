@@ -15,7 +15,7 @@ public class Friend {
 	private int friendId;
 	private String userName;
 	private String friendUserName;
-	private char status;  /* A->Accepted, R-> Rejected   P->Pending*/
+	private String status;  /* A->Accepted, R-> Rejected   P->Pending*/
 	public int getFriendId() {
 		return friendId;
 	}
@@ -34,10 +34,10 @@ public class Friend {
 	public void setFriendUserName(String friendUserName) {
 		this.friendUserName = friendUserName;
 	}
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	

@@ -1,0 +1,10 @@
+<div class="container-fluid" data-ng-controller="BlogController">
+<div class="row">
+<div class="col-md-12">
+<a href="" data-ng-click="showNewBlogs()" data-ng-show="currentUser.role='Admin'">Show New Blogs</a>
+<a href="" data-ng-click="showApprovedBlogs()">Show Approved Blogs</a>
+<a href="" data-ng-click="showRejectedBlogs()">Show Rejected Blogs</a>
+</div>
+</div>
+</div>
+

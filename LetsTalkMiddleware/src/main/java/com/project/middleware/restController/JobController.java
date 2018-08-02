@@ -84,7 +84,7 @@ public class JobController {
 		}
 	// ------------------Update Job -----------------------------------
 
-	@PutMapping("jobUpdate")
+	@PutMapping(value="/jobUpdate")
 	public ResponseEntity<Job> updateJob(@RequestBody Job job) {
 		if (jobDAO.getJob(job.getJobid()) == null) {
 			return new ResponseEntity<Job>(job, HttpStatus.NOT_FOUND);

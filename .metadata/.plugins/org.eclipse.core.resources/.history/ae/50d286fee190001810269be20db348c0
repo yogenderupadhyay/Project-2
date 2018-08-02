@@ -1,0 +1,43 @@
+<div class="container" data-data-ng-Controller="UserController">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<h1 class="well Text-Center">
+				<font face="Monotype Corsiva">Update current User</font>
+			</h1>
+			<form>
+				<div class="form group well">
+					<label>First Name</label> <input type="text" name="firstname"
+						data-ng-model="currentUser.firstName" placeholder="Enter your First Name.."
+						class="form-control"> <label>Last Name</label> <input
+						type="text" name="lastname" data-ng-model="currentUser.lastName"
+						placeholder="Enter your Last Name.." class="form-control">
+						
+						<label>currentUsername:</label> <input type="text"
+							data-ng-model="currentUser.emailID"
+							class="form-control" 
+							name="uname">
+			
+					
+						<label>Password:</label> <input type="password"
+							data-ng-model="currentUser.password"
+							class="form-control"  name="psw">
+					
+						<label>Gender :</label><br> <input type="radio"
+							data-ng-model="currentUser.gender" name="gender" value="M" checked> Male<br>
+						<input type="radio" data-ng-model="currentUser.gender" name="gender" value="F">
+						Female<br>
+					
+						<label>Mobile:</label> <input type="text"
+							class="form-control"  data-ng-model="currentUser.mobile"
+							placeholder="Enter your mobile number" name="mobile">
+					
+						<!-- <label>Date of Birth:</label> <input type="date"
+							class="form-control" data-ng-model="{{currentUser.d_o_b}}" placeholder="mm/dd/yy" name="dob"> -->
+					
+					<button type="button" data-ng-click="updateUserDetails()"
+						class="btn btn-lg btn-info center">Update Details</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

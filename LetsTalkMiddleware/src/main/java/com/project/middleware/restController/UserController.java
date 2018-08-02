@@ -26,8 +26,6 @@ public class UserController
 	@Autowired
 	private UserDAO userDAO;
 	@Autowired
-	private User user;
-	@Autowired
 	private JobDAO jobDAO;
 	@Autowired
 	private JobApplication jobApplication;
@@ -37,24 +35,20 @@ public class UserController
 	public String serverTest() {
 		return "This is my first webservice";
 	}
-	//------------------CheckLogin-----------------
+//------------------------------------CheckLogin------------------------------------------
 	@PostMapping("/login")
-
 	public ResponseEntity<User> validateCredentials(@RequestBody User user,HttpSession session) {
 		System.out.println(user.getEmailID() + user.getPassword());
-		user=userDAO.get(user.getEmailID());
 		user= userDAO.validate(user.getEmailID(), user.getPassword());
-		session.setAttribute("user", user);
 		if ( user== null) {
-			
 			return new ResponseEntity<User>(user, HttpStatus.UNAUTHORIZED);
 		} else {
+			session.setAttribute("user", user);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
-
 	}
 		
-		// ----------------- Register User ---------------
+// --------------------------------- Register User ---------------------------------------
 		@PostMapping(value = "/registerUser")
 		public ResponseEntity<User> registerUser(@RequestBody User user) {
 			
@@ -68,10 +62,10 @@ public class UserController
 			}
 		}
 
-		// ------------------------ Update User -----------------------------
-		@PutMapping("userUpdate")
-
+// --------------------------------- Update User -------------------------------------------
+		@PutMapping("/userUpdate")
 		public ResponseEntity<User> updateUser(@RequestBody User user) {
+			System.out.println("inside update method resr controller");
 			if (userDAO.get(user.getEmailID()) == null) {
 				return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
 			}
@@ -83,7 +77,7 @@ public class UserController
 				return new ResponseEntity<User>(user, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 
-		// ------------------------ List Users --------------------------
+// --------------------------------- List Users ---------------------------------------------
 		@GetMapping(value = "/listUsers")
 		public ResponseEntity<List<User>> listUsers() {
 			List<User> listUsers = userDAO.list();
@@ -93,7 +87,7 @@ public class UserController
 			return new ResponseEntity<List<User>>(listUsers, HttpStatus.NOT_FOUND);
 		}
 
-		// ------------------------- Get User ----------------------
+// --------------------------------- Get User -------------------------------------------------
 		@GetMapping(value = "/getUser/{emailID}")
 		public ResponseEntity<User> getUser(@PathVariable("emailID") String emailID) {
 			System.out.println(emailID);
@@ -106,6 +100,7 @@ public class UserController
 			}
 		}
 
+//-----------------------------------delete user------------------------------------------
 		@DeleteMapping(value = "/deleteUser/{emailID}")
 		public ResponseEntity<String> deleteUser(@PathVariable("emailID") String emailID) {
 			System.out.println("In delete user" + emailID);
